@@ -5,16 +5,22 @@
 package com.tqh.pojo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -25,21 +31,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
-    @NamedQuery(name = "Users.findByIdUsers", query = "SELECT u FROM Users u WHERE u.idUsers = :idUsers"),
+    @NamedQuery(name = "Users.findByIdUsers", query = "SELECT u FROM Users u WHERE u.usersPK.idUsers = :idUsers"),
     @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name"),
     @NamedQuery(name = "Users.findByAvata", query = "SELECT u FROM Users u WHERE u.avata = :avata"),
     @NamedQuery(name = "Users.findByLoginName", query = "SELECT u FROM Users u WHERE u.loginName = :loginName"),
     @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
     @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email"),
-    @NamedQuery(name = "Users.findByLoaiUser", query = "SELECT u FROM Users u WHERE u.loaiUser = :loaiUser")})
+    @NamedQuery(name = "Users.findByLoaiUser", query = "SELECT u FROM Users u WHERE u.loaiUser = :loaiUser"),
+    @NamedQuery(name = "Users.findByPermissionidPermission", query = "SELECT u FROM Users u WHERE u.usersPK.permissionidPermission = :permissionidPermission")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "idUsers")
-    private Integer idUsers;
+    @EmbeddedId
+    protected UsersPK usersPK;
     @Size(max = 45)
     @Column(name = "Name")
     private String name;
@@ -65,27 +69,36 @@ public class Users implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "loaiUser")
     private String loaiUser;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
+    private Collection<Post> postCollection;
+    @JoinColumn(name = "permission_idPermission", referencedColumnName = "idPermission", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Permission permission;
 
     public Users() {
     }
 
-    public Users(Integer idUsers) {
-        this.idUsers = idUsers;
+    public Users(UsersPK usersPK) {
+        this.usersPK = usersPK;
     }
 
-    public Users(Integer idUsers, String loginName, String password, String loaiUser) {
-        this.idUsers = idUsers;
+    public Users(UsersPK usersPK, String loginName, String password, String loaiUser) {
+        this.usersPK = usersPK;
         this.loginName = loginName;
         this.password = password;
         this.loaiUser = loaiUser;
     }
 
-    public Integer getIdUsers() {
-        return idUsers;
+    public Users(int idUsers, int permissionidPermission) {
+        this.usersPK = new UsersPK(idUsers, permissionidPermission);
     }
 
-    public void setIdUsers(Integer idUsers) {
-        this.idUsers = idUsers;
+    public UsersPK getUsersPK() {
+        return usersPK;
+    }
+
+    public void setUsersPK(UsersPK usersPK) {
+        this.usersPK = usersPK;
     }
 
     public String getName() {
@@ -136,10 +149,27 @@ public class Users implements Serializable {
         this.loaiUser = loaiUser;
     }
 
+    @XmlTransient
+    public Collection<Post> getPostCollection() {
+        return postCollection;
+    }
+
+    public void setPostCollection(Collection<Post> postCollection) {
+        this.postCollection = postCollection;
+    }
+
+    public Permission getPermission() {
+        return permission;
+    }
+
+    public void setPermission(Permission permission) {
+        this.permission = permission;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idUsers != null ? idUsers.hashCode() : 0);
+        hash += (usersPK != null ? usersPK.hashCode() : 0);
         return hash;
     }
 
@@ -150,7 +180,7 @@ public class Users implements Serializable {
             return false;
         }
         Users other = (Users) object;
-        if ((this.idUsers == null && other.idUsers != null) || (this.idUsers != null && !this.idUsers.equals(other.idUsers))) {
+        if ((this.usersPK == null && other.usersPK != null) || (this.usersPK != null && !this.usersPK.equals(other.usersPK))) {
             return false;
         }
         return true;
@@ -158,7 +188,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tqh.configs.Users[ idUsers=" + idUsers + " ]";
+        return "com.tqh.pojo.Users[ usersPK=" + usersPK + " ]";
     }
     
 }
