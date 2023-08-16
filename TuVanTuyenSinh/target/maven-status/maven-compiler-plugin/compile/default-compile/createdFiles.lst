@@ -1,15 +1,5 @@
-com\tqh\pojo\Binhluan.class
 com\tqh\configs\TilesConfigs.class
-com\tqh\configs\DispatcherServletInit.class
-com\tqh\pojo\Baidang.class
-com\tqh\pojo\Users_.class
 com\tqh\configs\WebAppContextConfig.class
-com\tqh\pojo\Khoa.class
-com\tqh\pojo\Users.class
-com\tqh\pojo\Khoa_.class
-com\tqh\pojo\Thongtintuyensinh_.class
 com\tqh\controllers\IndexController.class
-com\tqh\pojo\Baidang_.class
-com\tqh\pojo\Binhluan_.class
-com\tqh\pojo\Thongtintuyensinh.class
+com\tqh\configs\DispatcherServletInit.class
 com\tqh\configs\HibernateConfig.class
