@@ -16,11 +16,11 @@
     <!-- Section: Social media -->
     <section
              class="d-flex justify-content-between p-4"
-             style="background-color: #6351ce"
+             style="background-color: red"
              >
       <!-- Left -->
       <div class="me-5">
-        <span>Get connected with us on social networks:</span>
+        <span>Liên hệ với chúng tôi:</span>
       </div>
       <!-- Left -->
 
@@ -57,15 +57,13 @@
           <!-- Grid column -->
           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
             <!-- Content -->
-            <h6 class="text-uppercase fw-bold">Company name</h6>
+            <h6 class="text-uppercase fw-bold">Huy</h6>
             <hr
                 class="mb-4 mt-0 d-inline-block mx-auto"
                 style="width: 60px; background-color: #7c4dff; height: 2px"
                 />
             <p>
-              Here you can use rows and columns to organize your footer
-              content. Lorem ipsum dolor sit amet, consectetur adipisicing
-              elit.
+              Chuyên cung cấp các dịch vụ trang web
             </p>
           </div>
           <!-- Grid column -->
@@ -73,22 +71,16 @@
           <!-- Grid column -->
           <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
-            <h6 class="text-uppercase fw-bold">Products</h6>
+            <h6 class="text-uppercase fw-bold">Sản phẩm</h6>
             <hr
                 class="mb-4 mt-0 d-inline-block mx-auto"
                 style="width: 60px; background-color: #7c4dff; height: 2px"
                 />
             <p>
-              <a href="#!" class="text-white">MDBootstrap</a>
+              <a href="#!" class="text-white">Cổng thông tin tư vấn tuyển sinh</a>
             </p>
             <p>
-              <a href="#!" class="text-white">MDWordPress</a>
-            </p>
-            <p>
-              <a href="#!" class="text-white">BrandFlow</a>
-            </p>
-            <p>
-              <a href="#!" class="text-white">Bootstrap Angular</a>
+              <a href="#!" class="text-white">Website bán vé máy bay</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -124,10 +116,10 @@
                 class="mb-4 mt-0 d-inline-block mx-auto"
                 style="width: 60px; background-color: #7c4dff; height: 2px"
                 />
-            <p><i class="fa fa-home mr-3"></i> New York, NY 10012, US</p>
-            <p><i class="fa fa-envelope mr-3"></i> info@example.com</p>
-            <p><i class="fa fa-phone mr-3"></i> + 01 234 567 88</p>
-            <p><i class="fa fa-print mr-3"></i> + 01 234 567 89</p>
+            <p><i class="fa fa-home mr-3"></i> Việt Nam, VN</p>
+            <p><i class="fa fa-envelope mr-3"></i> huy@gmail.com</p>
+            <p><i class="fa fa-phone mr-3"></i> 0938842106</p>
+            <p><i class="fa fa-print mr-3"></i> 123456789</p>
           </div>
           <!-- Grid column -->
         </div>
@@ -142,8 +134,8 @@
          style="background-color: rgba(0, 0, 0, 0.2)"
          >
       © 2020 Copyright:
-      <a class="text-white" href="https://mdbootstrap.com/"
-         >MDBootstrap.com</a
+      <a class="text-white" href=""
+         >Huy</a
         >
     </div>
     <!-- Copyright -->

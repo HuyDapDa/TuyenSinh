@@ -9,12 +9,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <section class="mb-3 mt-3">
-    <div class="container-fluid px-md-5">
+    <div class="">
         <div class="row justify-content-between">
             <div class="col-md-8 order-md-last">
                 <div class="row">
                     <div class="col-md-6 text-center">
-                        <a class="navbar-brand" href="index.html">Logistica <span>Architecture Agency</span></a>
+                        <a class="navbar-brand" href="">Cổng thông tin <br>Tư Vấn Tuyển Sinh</br></a>
                     </div>
                     <div class="col-md-6 d-md-flex justify-content-end mb-md-0 mb-3">
                         <form action="#" class="searchform order-lg-last">
@@ -35,7 +35,7 @@
                         <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
                     </p>
                 </div>
-            </div>
+            </div
         </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -46,19 +46,27 @@
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav m-auto">
-                    <li class="nav-item active"><a href="#" class="nav-link">Home</a></li>
+                    <li class="nav-item active"><a href="#" class="nav-link">Trang Chủ</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Page</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hệ</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="#">Page 1</a>
-                            <a class="dropdown-item" href="#">Page 2</a>
-                            <a class="dropdown-item" href="#">Page 3</a>
-                            <a class="dropdown-item" href="#">Page 4</a>
+                            <a class="dropdown-item" href="#">Hệ Chính Quy</a>
+                            <a class="dropdown-item" href="#">Hệ Đào Tạo Từ Xa</a>
+                            <a class="dropdown-item" href="#">Văn Bằng 2</a>
+                            <a class="dropdown-item" href="#">Liên Thông</a>
                         </div>
                     </li>
-                    <li class="nav-item"><a href="#" class="nav-link">Work</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Khoa</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                            <a class="dropdown-item" href="#">Hệ Chính Quy</a>
+                            <a class="dropdown-item" href="#">Hệ Đào Tạo Từ Xa</a>
+                            <a class="dropdown-item" href="#">Văn Bằng 2</a>
+                            <a class="dropdown-item" href="#">Liên Thông</a>
+                            <a class="dropdown-item" href="#">Liên Thông</a>
+                            <a class="dropdown-item" href="#">Liên Thông</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
