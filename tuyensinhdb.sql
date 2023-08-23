@@ -35,7 +35,7 @@ CREATE TABLE `admission` (
 
 LOCK TABLES `admission` WRITE;
 /*!40000 ALTER TABLE `admission` DISABLE KEYS */;
-INSERT INTO `admission` VALUES (1,'CLC'),(2,'Dai Tra'),(3,'Dao Tao Tu Xa');
+INSERT INTO `admission` VALUES (1,'DTTX'),(2,'CLC'),(3,'DAITRA');
 /*!40000 ALTER TABLE `admission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,7 +65,7 @@ CREATE TABLE `benmarks` (
 
 LOCK TABLES `benmarks` WRITE;
 /*!40000 ALTER TABLE `benmarks` DISABLE KEYS */;
-INSERT INTO `benmarks` VALUES (1,'2020',28,26,600,1);
+INSERT INTO `benmarks` VALUES (1,'2023',26,25,600,1);
 /*!40000 ALTER TABLE `benmarks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,7 +79,14 @@ DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
   `idComment` int NOT NULL,
   `commentInfomation` longtext,
-  PRIMARY KEY (`idComment`)
+  `post_idPost` int NOT NULL,
+  `post_users_idUsers` int NOT NULL,
+  `post_users_permission_idPermission` int NOT NULL,
+  `post_faculty_idFaculty` int NOT NULL,
+  `post_admission_idAdmission` int NOT NULL,
+  PRIMARY KEY (`idComment`,`post_idPost`,`post_users_idUsers`,`post_users_permission_idPermission`,`post_faculty_idFaculty`,`post_admission_idAdmission`),
+  KEY `fk_comment_post1_idx` (`post_idPost`,`post_users_idUsers`,`post_users_permission_idPermission`,`post_faculty_idFaculty`,`post_admission_idAdmission`),
+  CONSTRAINT `fk_comment_post1` FOREIGN KEY (`post_idPost`, `post_users_idUsers`, `post_users_permission_idPermission`, `post_faculty_idFaculty`, `post_admission_idAdmission`) REFERENCES `post` (`idPost`, `users_idUsers`, `users_permission_idPermission`, `faculty_idFaculty`, `admission_idAdmission`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -89,7 +96,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (1,'ádasaaasdsas');
+INSERT INTO `comment` VALUES (1,'JAVA KHO VAI LOZ',1,1,1,1,1);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +146,7 @@ CREATE TABLE `permission` (
 
 LOCK TABLES `permission` WRITE;
 /*!40000 ALTER TABLE `permission` DISABLE KEYS */;
-INSERT INTO `permission` VALUES (1,'Admin'),(2,'User');
+INSERT INTO `permission` VALUES (1,'Admin'),(2,'SinhVien'),(3,'GiangVien');
 /*!40000 ALTER TABLE `permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,38 +181,8 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (1,'','Bài báo',1,1,1,1);
+INSERT INTO `post` VALUES (1,'DIT ME JAVA','Thong Bao',1,1,1,1);
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `post_has_comment`
---
-
-DROP TABLE IF EXISTS `post_has_comment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `post_has_comment` (
-  `post_idPost` int NOT NULL,
-  `post_users_idUsers` int NOT NULL,
-  `post_users_permission_idPermission` int NOT NULL,
-  `comment_idComment` int NOT NULL,
-  PRIMARY KEY (`post_idPost`,`post_users_idUsers`,`post_users_permission_idPermission`,`comment_idComment`),
-  KEY `fk_post_has_comment_comment1_idx` (`comment_idComment`),
-  KEY `fk_post_has_comment_post1_idx` (`post_idPost`,`post_users_idUsers`,`post_users_permission_idPermission`),
-  CONSTRAINT `fk_post_has_comment_comment1` FOREIGN KEY (`comment_idComment`) REFERENCES `comment` (`idComment`),
-  CONSTRAINT `fk_post_has_comment_post1` FOREIGN KEY (`post_idPost`, `post_users_idUsers`, `post_users_permission_idPermission`) REFERENCES `post` (`idPost`, `users_idUsers`, `users_permission_idPermission`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `post_has_comment`
---
-
-LOCK TABLES `post_has_comment` WRITE;
-/*!40000 ALTER TABLE `post_has_comment` DISABLE KEYS */;
-INSERT INTO `post_has_comment` VALUES (1,1,1,1);
-/*!40000 ALTER TABLE `post_has_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -236,7 +213,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Nguyen Cao Danh',NULL,'DanhCao198','123456','danhcao.ng@gmail.com','1',1),(2,'Tran Quang Huy',NULL,'HuyTran123','123456','huytran@gmail.com','2',2);
+INSERT INTO `users` VALUES (1,'Nguyen Cao Danh',NULL,'DanhCao123','123456','caodanh.ng@gmal.com','1',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -249,4 +226,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-06 11:31:16
+-- Dump completed on 2023-08-19  8:29:58

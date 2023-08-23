@@ -46,7 +46,7 @@
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav m-auto">
-                    <li class="nav-item active"><a href="#" class="nav-link">Trang Chủ</a></li>
+                    <li class="nav-item active"><a href="${action}" class="nav-link">Trang Chủ</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hệ</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -69,6 +69,11 @@
                     </li>
                 </ul>
             </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="<c:url value="/login" />" class="nav-link">Đăng Nhập</a>
+                </li>
+            </ul>
         </div>
     </nav>
     <!-- END nav -->

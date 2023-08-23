@@ -1,5 +1,5 @@
-com\tqh\configs\TilesConfigs.class
-com\tqh\configs\WebAppContextConfig.class
-com\tqh\controllers\IndexController.class
 com\tqh\configs\DispatcherServletInit.class
+com\tqh\configs\WebAppContextConfig.class
 com\tqh\configs\HibernateConfig.class
+com\tqh\configs\TilesConfigs.class
+com\tqh\controllers\IndexController.class

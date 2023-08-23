@@ -13,6 +13,13 @@
     <class>com.tqh.pojo.Comment</class>
     <class>com.tqh.pojo.Admission</class>
     <class>com.tqh.pojo.Permission</class>
+    <class>com.tqh.configs.Users</class>
+    <class>com.tqh.configs.Benmarks</class>
+    <class>com.tqh.configs.Admission</class>
+    <class>com.tqh.configs.Post</class>
+    <class>com.tqh.configs.Faculty</class>
+    <class>com.tqh.configs.Comment</class>
+    <class>com.tqh.configs.Permission</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tuyensinh?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
