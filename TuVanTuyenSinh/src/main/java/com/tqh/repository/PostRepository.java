@@ -4,15 +4,18 @@
  */
 package com.tqh.repository;
 
-import com.tqh.pojo.Users;
+import com.tqh.pojo.Post;
+import java.util.List;
 import java.util.Map;
 
 /**
  *
  * @author Admin
  */
-public interface UserRepository {
-    Users getUserByUsername(String username);
-    boolean authUser(String username, String password);
-    Users addUser(Users user);
+public interface PostRepository {
+    List<Post> getPosts(Map<String, String> params);
+    Long countPost();
+    boolean addOrUpdatePost(Post p);
+    Post getPostById(int id);
+    boolean deletePost(int id);
 }

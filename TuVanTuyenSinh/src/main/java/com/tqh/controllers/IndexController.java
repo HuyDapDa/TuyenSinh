@@ -4,6 +4,7 @@
  */
 package com.tqh.controllers;
 
+import com.tqh.service.PostService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
@@ -23,15 +24,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 @ControllerAdvice
 @PropertySource("classpath:configs.properties")
 public class IndexController {
+
+    @Autowired
+    private PostService postService;
+    @Autowired
+    private Environment env;
+
     @RequestMapping("/")
-    public String index() {
-//        model.addAttribute("products", this.productService.getProducts(params));
-//        
-//        
-//        int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE"));
-//        long count = this.productService.countProduct();
-//        model.addAttribute("counter", Math.ceil(count*1.0/pageSize));
-//        
+    public String index(Model model, @RequestParam Map<String, String> params) {
+        model.addAttribute("posts", this.postService.getPosts(params));
+
+        int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE"));
+        long count = this.postService.countPost();
+        model.addAttribute("counter", Math.ceil(count * 1.0 / pageSize));
+
         return "index";
     }
 }
