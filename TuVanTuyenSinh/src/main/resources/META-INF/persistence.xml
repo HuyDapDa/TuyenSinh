@@ -2,10 +2,6 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="com.tqh_TuVanTuyenSinh_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.tqh.pojo.Baidang</class>
-    <class>com.tqh.pojo.Binhluan</class>
-    <class>com.tqh.pojo.Thongtintuyensinh</class>
-    <class>com.tqh.pojo.Khoa</class>
     <class>com.tqh.pojo.Users</class>
     <class>com.tqh.pojo.Faculty</class>
     <class>com.tqh.pojo.Benmarks</class>
@@ -13,13 +9,6 @@
     <class>com.tqh.pojo.Comment</class>
     <class>com.tqh.pojo.Admission</class>
     <class>com.tqh.pojo.Permission</class>
-    <class>com.tqh.configs.Users</class>
-    <class>com.tqh.configs.Benmarks</class>
-    <class>com.tqh.configs.Admission</class>
-    <class>com.tqh.configs.Post</class>
-    <class>com.tqh.configs.Faculty</class>
-    <class>com.tqh.configs.Comment</class>
-    <class>com.tqh.configs.Permission</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tuyensinh?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
