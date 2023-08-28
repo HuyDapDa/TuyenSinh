@@ -10,7 +10,11 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -30,34 +34,35 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Faculty.findAll", query = "SELECT f FROM Faculty f"),
     @NamedQuery(name = "Faculty.findByIdFaculty", query = "SELECT f FROM Faculty f WHERE f.idFaculty = :idFaculty"),
-    @NamedQuery(name = "Faculty.findByFalcutyName", query = "SELECT f FROM Faculty f WHERE f.falcutyName = :falcutyName"),
+    @NamedQuery(name = "Faculty.findByFacultyName", query = "SELECT f FROM Faculty f WHERE f.facultyName = :facultyName"),
     @NamedQuery(name = "Faculty.findByWebsite", query = "SELECT f FROM Faculty f WHERE f.website = :website"),
     @NamedQuery(name = "Faculty.findByIntroVideo", query = "SELECT f FROM Faculty f WHERE f.introVideo = :introVideo")})
 public class Faculty implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idFaculty")
     private Integer idFaculty;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "falcutyName")
-    private String falcutyName;
+    @Column(name = "facultyName")
+    private String facultyName;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "website")
     private String website;
-    @Size(max = 50)
+    @Size(max = 45)
     @Column(name = "introVideo")
     private String introVideo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "faculty")
-    private Collection<Benmarks> benmarksCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "faculty")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "facultyidFaculty")
     private Collection<Post> postCollection;
+    @JoinColumn(name = "benmarks_idBenmarks", referencedColumnName = "idBenmarks")
+    @ManyToOne(optional = false)
+    private Benmarks benmarksidBenmarks;
 
     public Faculty() {
     }
@@ -66,9 +71,9 @@ public class Faculty implements Serializable {
         this.idFaculty = idFaculty;
     }
 
-    public Faculty(Integer idFaculty, String falcutyName, String website) {
+    public Faculty(Integer idFaculty, String facultyName, String website) {
         this.idFaculty = idFaculty;
-        this.falcutyName = falcutyName;
+        this.facultyName = facultyName;
         this.website = website;
     }
 
@@ -80,12 +85,12 @@ public class Faculty implements Serializable {
         this.idFaculty = idFaculty;
     }
 
-    public String getFalcutyName() {
-        return falcutyName;
+    public String getFacultyName() {
+        return facultyName;
     }
 
-    public void setFalcutyName(String falcutyName) {
-        this.falcutyName = falcutyName;
+    public void setFacultyName(String facultyName) {
+        this.facultyName = facultyName;
     }
 
     public String getWebsite() {
@@ -105,21 +110,20 @@ public class Faculty implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Benmarks> getBenmarksCollection() {
-        return benmarksCollection;
-    }
-
-    public void setBenmarksCollection(Collection<Benmarks> benmarksCollection) {
-        this.benmarksCollection = benmarksCollection;
-    }
-
-    @XmlTransient
     public Collection<Post> getPostCollection() {
         return postCollection;
     }
 
     public void setPostCollection(Collection<Post> postCollection) {
         this.postCollection = postCollection;
+    }
+
+    public Benmarks getBenmarksidBenmarks() {
+        return benmarksidBenmarks;
+    }
+
+    public void setBenmarksidBenmarks(Benmarks benmarksidBenmarks) {
+        this.benmarksidBenmarks = benmarksidBenmarks;
     }
 
     @Override

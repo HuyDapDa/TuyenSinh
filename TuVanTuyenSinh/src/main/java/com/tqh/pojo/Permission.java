@@ -42,9 +42,9 @@ public class Permission implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "PermissionName")
+    @Column(name = "permissionName")
     private String permissionName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "permission")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "permissionidPermission")
     private Collection<Users> usersCollection;
 
     public Permission() {

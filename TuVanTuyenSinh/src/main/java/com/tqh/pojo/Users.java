@@ -9,8 +9,10 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -31,30 +33,32 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
-    @NamedQuery(name = "Users.findByIdUsers", query = "SELECT u FROM Users u WHERE u.usersPK.idUsers = :idUsers"),
+    @NamedQuery(name = "Users.findByIdUsers", query = "SELECT u FROM Users u WHERE u.idUsers = :idUsers"),
     @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name"),
-    @NamedQuery(name = "Users.findByAvata", query = "SELECT u FROM Users u WHERE u.avata = :avata"),
-    @NamedQuery(name = "Users.findByLoginName", query = "SELECT u FROM Users u WHERE u.loginName = :loginName"),
+    @NamedQuery(name = "Users.findByAvatar", query = "SELECT u FROM Users u WHERE u.avatar = :avatar"),
+    @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username"),
     @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
     @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email"),
-    @NamedQuery(name = "Users.findByLoaiUser", query = "SELECT u FROM Users u WHERE u.loaiUser = :loaiUser"),
-    @NamedQuery(name = "Users.findByPermissionidPermission", query = "SELECT u FROM Users u WHERE u.usersPK.permissionidPermission = :permissionidPermission")})
+    @NamedQuery(name = "Users.findByUserRole", query = "SELECT u FROM Users u WHERE u.userRole = :userRole")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected UsersPK usersPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idUsers")
+    private Integer idUsers;
     @Size(max = 45)
     @Column(name = "Name")
     private String name;
-    @Size(max = 50)
-    @Column(name = "Avata")
-    private String avata;
+    @Size(max = 45)
+    @Column(name = "Avatar")
+    private String avatar;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "LoginName")
-    private String loginName;
+    @Column(name = "Username")
+    private String username;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -67,38 +71,36 @@ public class Users implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "loaiUser")
-    private String loaiUser;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
+    @Column(name = "User_Role")
+    private String userRole;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userspermissionidPermission")
     private Collection<Post> postCollection;
-    @JoinColumn(name = "permission_idPermission", referencedColumnName = "idPermission", insertable = false, updatable = false)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersidUsers")
+    private Collection<Post> postCollection1;
+    @JoinColumn(name = "permission_idPermission", referencedColumnName = "idPermission")
     @ManyToOne(optional = false)
-    private Permission permission;
+    private Permission permissionidPermission;
 
     public Users() {
     }
 
-    public Users(UsersPK usersPK) {
-        this.usersPK = usersPK;
+    public Users(Integer idUsers) {
+        this.idUsers = idUsers;
     }
 
-    public Users(UsersPK usersPK, String loginName, String password, String loaiUser) {
-        this.usersPK = usersPK;
-        this.loginName = loginName;
+    public Users(Integer idUsers, String username, String password, String userRole) {
+        this.idUsers = idUsers;
+        this.username = username;
         this.password = password;
-        this.loaiUser = loaiUser;
+        this.userRole = userRole;
     }
 
-    public Users(int idUsers, int permissionidPermission) {
-        this.usersPK = new UsersPK(idUsers, permissionidPermission);
+    public Integer getIdUsers() {
+        return idUsers;
     }
 
-    public UsersPK getUsersPK() {
-        return usersPK;
-    }
-
-    public void setUsersPK(UsersPK usersPK) {
-        this.usersPK = usersPK;
+    public void setIdUsers(Integer idUsers) {
+        this.idUsers = idUsers;
     }
 
     public String getName() {
@@ -109,20 +111,20 @@ public class Users implements Serializable {
         this.name = name;
     }
 
-    public String getAvata() {
-        return avata;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setAvata(String avata) {
-        this.avata = avata;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
-    public String getLoginName() {
-        return loginName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -141,12 +143,12 @@ public class Users implements Serializable {
         this.email = email;
     }
 
-    public String getLoaiUser() {
-        return loaiUser;
+    public String getUserRole() {
+        return userRole;
     }
 
-    public void setLoaiUser(String loaiUser) {
-        this.loaiUser = loaiUser;
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 
     @XmlTransient
@@ -158,18 +160,27 @@ public class Users implements Serializable {
         this.postCollection = postCollection;
     }
 
-    public Permission getPermission() {
-        return permission;
+    @XmlTransient
+    public Collection<Post> getPostCollection1() {
+        return postCollection1;
     }
 
-    public void setPermission(Permission permission) {
-        this.permission = permission;
+    public void setPostCollection1(Collection<Post> postCollection1) {
+        this.postCollection1 = postCollection1;
+    }
+
+    public Permission getPermissionidPermission() {
+        return permissionidPermission;
+    }
+
+    public void setPermissionidPermission(Permission permissionidPermission) {
+        this.permissionidPermission = permissionidPermission;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (usersPK != null ? usersPK.hashCode() : 0);
+        hash += (idUsers != null ? idUsers.hashCode() : 0);
         return hash;
     }
 
@@ -180,7 +191,7 @@ public class Users implements Serializable {
             return false;
         }
         Users other = (Users) object;
-        if ((this.usersPK == null && other.usersPK != null) || (this.usersPK != null && !this.usersPK.equals(other.usersPK))) {
+        if ((this.idUsers == null && other.idUsers != null) || (this.idUsers != null && !this.idUsers.equals(other.idUsers))) {
             return false;
         }
         return true;
@@ -188,7 +199,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tqh.pojo.Users[ usersPK=" + usersPK + " ]";
+        return "com.tqh.pojo.Users[ idUsers=" + idUsers + " ]";
     }
     
 }

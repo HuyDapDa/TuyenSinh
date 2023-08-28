@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Admission.findAll", query = "SELECT a FROM Admission a"),
     @NamedQuery(name = "Admission.findByIdAdmission", query = "SELECT a FROM Admission a WHERE a.idAdmission = :idAdmission"),
-    @NamedQuery(name = "Admission.findByTypeOfTraning", query = "SELECT a FROM Admission a WHERE a.typeOfTraning = :typeOfTraning")})
+    @NamedQuery(name = "Admission.findByTypeOfTraining", query = "SELECT a FROM Admission a WHERE a.typeOfTraining = :typeOfTraining")})
 public class Admission implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,9 +42,9 @@ public class Admission implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "typeOfTraning")
-    private String typeOfTraning;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "admission")
+    @Column(name = "typeOfTraining")
+    private String typeOfTraining;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "admissionidAdmission")
     private Collection<Post> postCollection;
 
     public Admission() {
@@ -54,9 +54,9 @@ public class Admission implements Serializable {
         this.idAdmission = idAdmission;
     }
 
-    public Admission(Integer idAdmission, String typeOfTraning) {
+    public Admission(Integer idAdmission, String typeOfTraining) {
         this.idAdmission = idAdmission;
-        this.typeOfTraning = typeOfTraning;
+        this.typeOfTraining = typeOfTraining;
     }
 
     public Integer getIdAdmission() {
@@ -67,12 +67,12 @@ public class Admission implements Serializable {
         this.idAdmission = idAdmission;
     }
 
-    public String getTypeOfTraning() {
-        return typeOfTraning;
+    public String getTypeOfTraining() {
+        return typeOfTraining;
     }
 
-    public void setTypeOfTraning(String typeOfTraning) {
-        this.typeOfTraning = typeOfTraning;
+    public void setTypeOfTraining(String typeOfTraining) {
+        this.typeOfTraining = typeOfTraining;
     }
 
     @XmlTransient

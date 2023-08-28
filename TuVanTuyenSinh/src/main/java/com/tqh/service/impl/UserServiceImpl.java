@@ -42,9 +42,9 @@ public class UserServiceImpl implements UserService{
             throw new UsernameNotFoundException("Invalid");
         }
         Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(u.getLoaiUser()));
+        authorities.add(new SimpleGrantedAuthority(u.getUserRole()));
         return new org.springframework.security.core.userdetails.User(
-                u.getLoginName(), u.getPassword(), authorities);
+                u.getUsername(), u.getPassword(), authorities);
     }
     
     @Override
@@ -62,14 +62,14 @@ public class UserServiceImpl implements UserService{
         Users u = new Users();
         u.setName(params.get("firstName"));
         u.setEmail(params.get("email"));
-        u.setLoginName(params.get("loginName"));
+        u.setUsername(params.get("loginName"));
         u.setPassword(this.passwordEncoder.encode(params.get("password")));
-        u.setLoaiUser("ROLE_USER");
+        u.setUserRole("ROLE_USER");
         if (!avatar.isEmpty()) {
             try {
                 Map res = this.cloudinary.uploader().upload(avatar.getBytes(), 
                         ObjectUtils.asMap("resource_type", "auto"));
-                u.setAvata(res.get("secure_url").toString());
+                u.setAvatar(res.get("secure_url").toString());
             } catch (IOException ex) {
                 Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }

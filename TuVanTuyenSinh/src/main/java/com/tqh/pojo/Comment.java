@@ -5,12 +5,13 @@
 package com.tqh.pojo;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -27,69 +28,102 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c"),
-    @NamedQuery(name = "Comment.findByIdComment", query = "SELECT c FROM Comment c WHERE c.commentPK.idComment = :idComment"),
-    @NamedQuery(name = "Comment.findByPostidPost", query = "SELECT c FROM Comment c WHERE c.commentPK.postidPost = :postidPost"),
-    @NamedQuery(name = "Comment.findByPostusersidUsers", query = "SELECT c FROM Comment c WHERE c.commentPK.postusersidUsers = :postusersidUsers"),
-    @NamedQuery(name = "Comment.findByPostuserspermissionidPermission", query = "SELECT c FROM Comment c WHERE c.commentPK.postuserspermissionidPermission = :postuserspermissionidPermission"),
-    @NamedQuery(name = "Comment.findByPostfacultyidFaculty", query = "SELECT c FROM Comment c WHERE c.commentPK.postfacultyidFaculty = :postfacultyidFaculty"),
-    @NamedQuery(name = "Comment.findByPostadmissionidAdmission", query = "SELECT c FROM Comment c WHERE c.commentPK.postadmissionidAdmission = :postadmissionidAdmission")})
+    @NamedQuery(name = "Comment.findByIdComment", query = "SELECT c FROM Comment c WHERE c.idComment = :idComment"),
+    @NamedQuery(name = "Comment.findByCommentInformation", query = "SELECT c FROM Comment c WHERE c.commentInformation = :commentInformation")})
 public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected CommentPK commentPK;
-    @Lob
-    @Size(max = 2147483647)
-    @Column(name = "commentInfomation")
-    private String commentInfomation;
-    @JoinColumns({
-        @JoinColumn(name = "post_idPost", referencedColumnName = "idPost", insertable = false, updatable = false),
-        @JoinColumn(name = "post_users_idUsers", referencedColumnName = "users_idUsers", insertable = false, updatable = false),
-        @JoinColumn(name = "post_users_permission_idPermission", referencedColumnName = "users_permission_idPermission", insertable = false, updatable = false),
-        @JoinColumn(name = "post_faculty_idFaculty", referencedColumnName = "faculty_idFaculty", insertable = false, updatable = false),
-        @JoinColumn(name = "post_admission_idAdmission", referencedColumnName = "admission_idAdmission", insertable = false, updatable = false)})
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idComment")
+    private Integer idComment;
+    @Size(max = 45)
+    @Column(name = "commentInformation")
+    private String commentInformation;
+    @JoinColumn(name = "post_faculty_idFaculty", referencedColumnName = "faculty_idFaculty")
     @ManyToOne(optional = false)
-    private Post post;
+    private Post postfacultyidFaculty;
+    @JoinColumn(name = "post_idPost", referencedColumnName = "idPost")
+    @ManyToOne(optional = false)
+    private Post postidPost;
+    @JoinColumn(name = "post_users_idUsers", referencedColumnName = "users_idUsers")
+    @ManyToOne(optional = false)
+    private Post postusersidUsers;
+    @JoinColumn(name = "post_users_permission_idPermission", referencedColumnName = "users_permission_idPermission")
+    @ManyToOne(optional = false)
+    private Post postuserspermissionidPermission;
+    @JoinColumn(name = "post_admission_idAdmission", referencedColumnName = "admission_idAdmission")
+    @ManyToOne(optional = false)
+    private Post postadmissionidAdmission;
 
     public Comment() {
     }
 
-    public Comment(CommentPK commentPK) {
-        this.commentPK = commentPK;
+    public Comment(Integer idComment) {
+        this.idComment = idComment;
     }
 
-    public Comment(int idComment, int postidPost, int postusersidUsers, int postuserspermissionidPermission, int postfacultyidFaculty, int postadmissionidAdmission) {
-        this.commentPK = new CommentPK(idComment, postidPost, postusersidUsers, postuserspermissionidPermission, postfacultyidFaculty, postadmissionidAdmission);
+    public Integer getIdComment() {
+        return idComment;
     }
 
-    public CommentPK getCommentPK() {
-        return commentPK;
+    public void setIdComment(Integer idComment) {
+        this.idComment = idComment;
     }
 
-    public void setCommentPK(CommentPK commentPK) {
-        this.commentPK = commentPK;
+    public String getCommentInformation() {
+        return commentInformation;
     }
 
-    public String getCommentInfomation() {
-        return commentInfomation;
+    public void setCommentInformation(String commentInformation) {
+        this.commentInformation = commentInformation;
     }
 
-    public void setCommentInfomation(String commentInfomation) {
-        this.commentInfomation = commentInfomation;
+    public Post getPostfacultyidFaculty() {
+        return postfacultyidFaculty;
     }
 
-    public Post getPost() {
-        return post;
+    public void setPostfacultyidFaculty(Post postfacultyidFaculty) {
+        this.postfacultyidFaculty = postfacultyidFaculty;
     }
 
-    public void setPost(Post post) {
-        this.post = post;
+    public Post getPostidPost() {
+        return postidPost;
+    }
+
+    public void setPostidPost(Post postidPost) {
+        this.postidPost = postidPost;
+    }
+
+    public Post getPostusersidUsers() {
+        return postusersidUsers;
+    }
+
+    public void setPostusersidUsers(Post postusersidUsers) {
+        this.postusersidUsers = postusersidUsers;
+    }
+
+    public Post getPostuserspermissionidPermission() {
+        return postuserspermissionidPermission;
+    }
+
+    public void setPostuserspermissionidPermission(Post postuserspermissionidPermission) {
+        this.postuserspermissionidPermission = postuserspermissionidPermission;
+    }
+
+    public Post getPostadmissionidAdmission() {
+        return postadmissionidAdmission;
+    }
+
+    public void setPostadmissionidAdmission(Post postadmissionidAdmission) {
+        this.postadmissionidAdmission = postadmissionidAdmission;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (commentPK != null ? commentPK.hashCode() : 0);
+        hash += (idComment != null ? idComment.hashCode() : 0);
         return hash;
     }
 
@@ -100,7 +134,7 @@ public class Comment implements Serializable {
             return false;
         }
         Comment other = (Comment) object;
-        if ((this.commentPK == null && other.commentPK != null) || (this.commentPK != null && !this.commentPK.equals(other.commentPK))) {
+        if ((this.idComment == null && other.idComment != null) || (this.idComment != null && !this.idComment.equals(other.idComment))) {
             return false;
         }
         return true;
@@ -108,7 +142,7 @@ public class Comment implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tqh.pojo.Comment[ commentPK=" + commentPK + " ]";
+        return "com.tqh.pojo.Comment[ idComment=" + idComment + " ]";
     }
     
 }

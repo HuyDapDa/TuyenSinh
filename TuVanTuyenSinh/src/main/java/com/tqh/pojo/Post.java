@@ -9,10 +9,11 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -33,70 +34,74 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Post.findAll", query = "SELECT p FROM Post p"),
-    @NamedQuery(name = "Post.findByIdPost", query = "SELECT p FROM Post p WHERE p.postPK.idPost = :idPost"),
-    @NamedQuery(name = "Post.findByUsersidUsers", query = "SELECT p FROM Post p WHERE p.postPK.usersidUsers = :usersidUsers"),
-    @NamedQuery(name = "Post.findByUserspermissionidPermission", query = "SELECT p FROM Post p WHERE p.postPK.userspermissionidPermission = :userspermissionidPermission"),
-    @NamedQuery(name = "Post.findByFacultyidFaculty", query = "SELECT p FROM Post p WHERE p.postPK.facultyidFaculty = :facultyidFaculty"),
-    @NamedQuery(name = "Post.findByAdmissionidAdmission", query = "SELECT p FROM Post p WHERE p.postPK.admissionidAdmission = :admissionidAdmission")})
+    @NamedQuery(name = "Post.findByIdPost", query = "SELECT p FROM Post p WHERE p.idPost = :idPost")})
 public class Post implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected PostPK postPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idPost")
+    private Integer idPost;
     @Basic(optional = false)
     @NotNull
     @Lob
     @Size(min = 1, max = 2147483647)
-    @Column(name = "postInfomation")
-    private String postInfomation;
+    @Column(name = "postInformation")
+    private String postInformation;
     @Lob
     @Size(max = 2147483647)
     @Column(name = "postType")
     private String postType;
-    @JoinColumn(name = "admission_idAdmission", referencedColumnName = "idAdmission", insertable = false, updatable = false)
+    @JoinColumn(name = "admission_idAdmission", referencedColumnName = "idAdmission")
     @ManyToOne(optional = false)
-    private Admission admission;
-    @JoinColumn(name = "faculty_idFaculty", referencedColumnName = "idFaculty", insertable = false, updatable = false)
+    private Admission admissionidAdmission;
+    @JoinColumn(name = "faculty_idFaculty", referencedColumnName = "idFaculty")
     @ManyToOne(optional = false)
-    private Faculty faculty;
-    @JoinColumns({
-        @JoinColumn(name = "users_idUsers", referencedColumnName = "idUsers", insertable = false, updatable = false),
-        @JoinColumn(name = "users_permission_idPermission", referencedColumnName = "permission_idPermission", insertable = false, updatable = false)})
+    private Faculty facultyidFaculty;
+    @JoinColumn(name = "users_permission_idPermission", referencedColumnName = "permission_idPermission")
     @ManyToOne(optional = false)
-    private Users users;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private Users userspermissionidPermission;
+    @JoinColumn(name = "users_idUsers", referencedColumnName = "idUsers")
+    @ManyToOne(optional = false)
+    private Users usersidUsers;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postfacultyidFaculty")
     private Collection<Comment> commentCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postidPost")
+    private Collection<Comment> commentCollection1;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postusersidUsers")
+    private Collection<Comment> commentCollection2;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postuserspermissionidPermission")
+    private Collection<Comment> commentCollection3;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postadmissionidAdmission")
+    private Collection<Comment> commentCollection4;
 
     public Post() {
     }
 
-    public Post(PostPK postPK) {
-        this.postPK = postPK;
+    public Post(Integer idPost) {
+        this.idPost = idPost;
     }
 
-    public Post(PostPK postPK, String postInfomation) {
-        this.postPK = postPK;
-        this.postInfomation = postInfomation;
+    public Post(Integer idPost, String postInformation) {
+        this.idPost = idPost;
+        this.postInformation = postInformation;
     }
 
-    public Post(int idPost, int usersidUsers, int userspermissionidPermission, int facultyidFaculty, int admissionidAdmission) {
-        this.postPK = new PostPK(idPost, usersidUsers, userspermissionidPermission, facultyidFaculty, admissionidAdmission);
+    public Integer getIdPost() {
+        return idPost;
     }
 
-    public PostPK getPostPK() {
-        return postPK;
+    public void setIdPost(Integer idPost) {
+        this.idPost = idPost;
     }
 
-    public void setPostPK(PostPK postPK) {
-        this.postPK = postPK;
+    public String getPostInformation() {
+        return postInformation;
     }
 
-    public String getPostInfomation() {
-        return postInfomation;
-    }
-
-    public void setPostInfomation(String postInfomation) {
-        this.postInfomation = postInfomation;
+    public void setPostInformation(String postInformation) {
+        this.postInformation = postInformation;
     }
 
     public String getPostType() {
@@ -107,28 +112,36 @@ public class Post implements Serializable {
         this.postType = postType;
     }
 
-    public Admission getAdmission() {
-        return admission;
+    public Admission getAdmissionidAdmission() {
+        return admissionidAdmission;
     }
 
-    public void setAdmission(Admission admission) {
-        this.admission = admission;
+    public void setAdmissionidAdmission(Admission admissionidAdmission) {
+        this.admissionidAdmission = admissionidAdmission;
     }
 
-    public Faculty getFaculty() {
-        return faculty;
+    public Faculty getFacultyidFaculty() {
+        return facultyidFaculty;
     }
 
-    public void setFaculty(Faculty faculty) {
-        this.faculty = faculty;
+    public void setFacultyidFaculty(Faculty facultyidFaculty) {
+        this.facultyidFaculty = facultyidFaculty;
     }
 
-    public Users getUsers() {
-        return users;
+    public Users getUserspermissionidPermission() {
+        return userspermissionidPermission;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setUserspermissionidPermission(Users userspermissionidPermission) {
+        this.userspermissionidPermission = userspermissionidPermission;
+    }
+
+    public Users getUsersidUsers() {
+        return usersidUsers;
+    }
+
+    public void setUsersidUsers(Users usersidUsers) {
+        this.usersidUsers = usersidUsers;
     }
 
     @XmlTransient
@@ -140,10 +153,46 @@ public class Post implements Serializable {
         this.commentCollection = commentCollection;
     }
 
+    @XmlTransient
+    public Collection<Comment> getCommentCollection1() {
+        return commentCollection1;
+    }
+
+    public void setCommentCollection1(Collection<Comment> commentCollection1) {
+        this.commentCollection1 = commentCollection1;
+    }
+
+    @XmlTransient
+    public Collection<Comment> getCommentCollection2() {
+        return commentCollection2;
+    }
+
+    public void setCommentCollection2(Collection<Comment> commentCollection2) {
+        this.commentCollection2 = commentCollection2;
+    }
+
+    @XmlTransient
+    public Collection<Comment> getCommentCollection3() {
+        return commentCollection3;
+    }
+
+    public void setCommentCollection3(Collection<Comment> commentCollection3) {
+        this.commentCollection3 = commentCollection3;
+    }
+
+    @XmlTransient
+    public Collection<Comment> getCommentCollection4() {
+        return commentCollection4;
+    }
+
+    public void setCommentCollection4(Collection<Comment> commentCollection4) {
+        this.commentCollection4 = commentCollection4;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (postPK != null ? postPK.hashCode() : 0);
+        hash += (idPost != null ? idPost.hashCode() : 0);
         return hash;
     }
 
@@ -154,7 +203,7 @@ public class Post implements Serializable {
             return false;
         }
         Post other = (Post) object;
-        if ((this.postPK == null && other.postPK != null) || (this.postPK != null && !this.postPK.equals(other.postPK))) {
+        if ((this.idPost == null && other.idPost != null) || (this.idPost != null && !this.idPost.equals(other.idPost))) {
             return false;
         }
         return true;
@@ -162,7 +211,7 @@ public class Post implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tqh.pojo.Post[ postPK=" + postPK + " ]";
+        return "com.tqh.pojo.Post[ idPost=" + idPost + " ]";
     }
     
 }
