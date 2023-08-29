@@ -3,6 +3,7 @@ E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\repository\UserRepo
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\configs\HibernateConfig.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\pojo\Permission.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\configs\WebAppContextConfig.java
+E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\service\PostService.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\controllers\IndexController.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\pojo\Post.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\configs\SpringSecurityConfig.java
@@ -11,9 +12,13 @@ E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\pojo\Admission.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\repository\impl\UserRepositoryImpl.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\pojo\Benmarks.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\controllers\UserController.java
+E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\service\impl\PostServiceImpl.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\service\UserService.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\configs\TilesConfigs.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\pojo\Faculty.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\pojo\Comment.java
+E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\repository\PostRepository.java
+E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\repository\impl\PostRepositoryImpl.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\pojo\Users.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\configs\SecurityWebApplicationInitializer.java
+E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\controllers\PostController.java

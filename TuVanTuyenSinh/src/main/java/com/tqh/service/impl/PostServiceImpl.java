@@ -22,8 +22,8 @@ public class PostServiceImpl implements PostService{
     
     @Autowired
     private PostRepository postRepo;
-    @Autowired
-    private Cloudinary cloudinary;
+//    @Autowired
+//    private Cloudinary cloudinary;
 
     @Override
     public List<Post> getPosts(Map<String, String> params) {
@@ -37,7 +37,7 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public boolean addOrUpdatePost(Post p) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.postRepo.addOrUpdatePost(p);
     }
 
     @Override

@@ -29,15 +29,13 @@
             <div class="col-md-4 d-flex">
                 <div class="social-media">
                     <p class="mb-0 d-flex">
-                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
-                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
-                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
-                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
+                        <img src="WEB-INF/resources/assets/images/bieutuongtrai.png" alt="Social Media Icon" class="social-icon"/>
                     </p>
                 </div>
-            </div
+            </div>
         </div>
     </div>
+
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container-fluid">
 
@@ -54,17 +52,19 @@
                             <a class="dropdown-item" href="#">Hệ Đào Tạo Từ Xa</a>
                             <a class="dropdown-item" href="#">Văn Bằng 2</a>
                             <a class="dropdown-item" href="#">Liên Thông</a>
+                            <a class="dropdown-item" href="#">Cao học</a>
+
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Khoa</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="#">Hệ Chính Quy</a>
-                            <a class="dropdown-item" href="#">Hệ Đào Tạo Từ Xa</a>
-                            <a class="dropdown-item" href="#">Văn Bằng 2</a>
-                            <a class="dropdown-item" href="#">Liên Thông</a>
-                            <a class="dropdown-item" href="#">Liên Thông</a>
-                            <a class="dropdown-item" href="#">Liên Thông</a>
+                            <a class="dropdown-item" href="#">Công nghệ thông tin</a>
+                            <a class="dropdown-item" href="#">Xây dựng</a>
+                            <a class="dropdown-item" href="#">Tài chính ngân hàng</a>
+                            <a class="dropdown-item" href="#">Quản trị kinh doanh</a>
+                            <a class="dropdown-item" href="#">Ngôn ngữ</a>
+                            <a class="dropdown-item" href="#">Xã hội học</a>
                         </div>
                     </li>
                 </ul>
