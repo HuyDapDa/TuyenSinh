@@ -29,7 +29,7 @@
             <div class="col-md-4 d-flex">
                 <div class="social-media">
                     <p class="mb-0 d-flex">
-                        <img src="WEB-INF/resources/assets/images/bieutuongtrai.png" alt="Social Media Icon" class="social-icon"/>
+                        <img src="https://res.cloudinary.com/dev7q6f9g/image/upload/v1693319387/norzb2fl19qkalnqtmn5.png" width="60px" height="40px"/>
                     </p>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                 <span class="fa fa-bars"></span> Menu
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav m-auto">
+                <ul class="navbar-nav m-auto justify-content-center">
                     <li class="nav-item active"><a href="${action}" class="nav-link">Trang Chủ</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hệ</a>
