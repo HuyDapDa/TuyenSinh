@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -69,7 +70,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .access("hasRole('ROLE_ADMIN')");
 //        .antMatchers("/**/pay")
 //                .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
-//        http.csrf().disable();
+        http.csrf().disable();
     }
 
     @Bean

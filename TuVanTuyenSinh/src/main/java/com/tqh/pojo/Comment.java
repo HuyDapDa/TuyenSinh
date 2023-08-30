@@ -28,102 +28,102 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c"),
-    @NamedQuery(name = "Comment.findByIdComment", query = "SELECT c FROM Comment c WHERE c.idComment = :idComment"),
-    @NamedQuery(name = "Comment.findByCommentInformation", query = "SELECT c FROM Comment c WHERE c.commentInformation = :commentInformation")})
+    @NamedQuery(name = "Comment.findByIdcomment", query = "SELECT c FROM Comment c WHERE c.idcomment = :idcomment"),
+    @NamedQuery(name = "Comment.findByCommentinformation", query = "SELECT c FROM Comment c WHERE c.commentinformation = :commentinformation")})
 public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idComment")
-    private Integer idComment;
+    @Column(name = "idcomment")
+    private Integer idcomment;
     @Size(max = 45)
-    @Column(name = "commentInformation")
-    private String commentInformation;
-    @JoinColumn(name = "post_faculty_idFaculty", referencedColumnName = "faculty_idFaculty")
+    @Column(name = "commentinformation")
+    private String commentinformation;
+    @JoinColumn(name = "post_admission_idadmission", referencedColumnName = "admission_idadmission")
     @ManyToOne(optional = false)
-    private Post postfacultyidFaculty;
-    @JoinColumn(name = "post_idPost", referencedColumnName = "idPost")
+    private Post postAdmissionIdadmission;
+    @JoinColumn(name = "post_faculty_idfaculty", referencedColumnName = "faculty_idfaculty")
     @ManyToOne(optional = false)
-    private Post postidPost;
-    @JoinColumn(name = "post_users_idUsers", referencedColumnName = "users_idUsers")
+    private Post postFacultyIdfaculty;
+    @JoinColumn(name = "post_idpost", referencedColumnName = "idpost")
     @ManyToOne(optional = false)
-    private Post postusersidUsers;
-    @JoinColumn(name = "post_users_permission_idPermission", referencedColumnName = "users_permission_idPermission")
+    private Post postIdpost;
+    @JoinColumn(name = "post_users_idusers", referencedColumnName = "users_idusers")
     @ManyToOne(optional = false)
-    private Post postuserspermissionidPermission;
-    @JoinColumn(name = "post_admission_idAdmission", referencedColumnName = "admission_idAdmission")
+    private Post postUsersIdusers;
+    @JoinColumn(name = "post_users_permission_idpermission", referencedColumnName = "users_permission_idpermission")
     @ManyToOne(optional = false)
-    private Post postadmissionidAdmission;
+    private Post postUsersPermissionIdpermission;
 
     public Comment() {
     }
 
-    public Comment(Integer idComment) {
-        this.idComment = idComment;
+    public Comment(Integer idcomment) {
+        this.idcomment = idcomment;
     }
 
-    public Integer getIdComment() {
-        return idComment;
+    public Integer getIdcomment() {
+        return idcomment;
     }
 
-    public void setIdComment(Integer idComment) {
-        this.idComment = idComment;
+    public void setIdcomment(Integer idcomment) {
+        this.idcomment = idcomment;
     }
 
-    public String getCommentInformation() {
-        return commentInformation;
+    public String getCommentinformation() {
+        return commentinformation;
     }
 
-    public void setCommentInformation(String commentInformation) {
-        this.commentInformation = commentInformation;
+    public void setCommentinformation(String commentinformation) {
+        this.commentinformation = commentinformation;
     }
 
-    public Post getPostfacultyidFaculty() {
-        return postfacultyidFaculty;
+    public Post getPostAdmissionIdadmission() {
+        return postAdmissionIdadmission;
     }
 
-    public void setPostfacultyidFaculty(Post postfacultyidFaculty) {
-        this.postfacultyidFaculty = postfacultyidFaculty;
+    public void setPostAdmissionIdadmission(Post postAdmissionIdadmission) {
+        this.postAdmissionIdadmission = postAdmissionIdadmission;
     }
 
-    public Post getPostidPost() {
-        return postidPost;
+    public Post getPostFacultyIdfaculty() {
+        return postFacultyIdfaculty;
     }
 
-    public void setPostidPost(Post postidPost) {
-        this.postidPost = postidPost;
+    public void setPostFacultyIdfaculty(Post postFacultyIdfaculty) {
+        this.postFacultyIdfaculty = postFacultyIdfaculty;
     }
 
-    public Post getPostusersidUsers() {
-        return postusersidUsers;
+    public Post getPostIdpost() {
+        return postIdpost;
     }
 
-    public void setPostusersidUsers(Post postusersidUsers) {
-        this.postusersidUsers = postusersidUsers;
+    public void setPostIdpost(Post postIdpost) {
+        this.postIdpost = postIdpost;
     }
 
-    public Post getPostuserspermissionidPermission() {
-        return postuserspermissionidPermission;
+    public Post getPostUsersIdusers() {
+        return postUsersIdusers;
     }
 
-    public void setPostuserspermissionidPermission(Post postuserspermissionidPermission) {
-        this.postuserspermissionidPermission = postuserspermissionidPermission;
+    public void setPostUsersIdusers(Post postUsersIdusers) {
+        this.postUsersIdusers = postUsersIdusers;
     }
 
-    public Post getPostadmissionidAdmission() {
-        return postadmissionidAdmission;
+    public Post getPostUsersPermissionIdpermission() {
+        return postUsersPermissionIdpermission;
     }
 
-    public void setPostadmissionidAdmission(Post postadmissionidAdmission) {
-        this.postadmissionidAdmission = postadmissionidAdmission;
+    public void setPostUsersPermissionIdpermission(Post postUsersPermissionIdpermission) {
+        this.postUsersPermissionIdpermission = postUsersPermissionIdpermission;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idComment != null ? idComment.hashCode() : 0);
+        hash += (idcomment != null ? idcomment.hashCode() : 0);
         return hash;
     }
 
@@ -134,7 +134,7 @@ public class Comment implements Serializable {
             return false;
         }
         Comment other = (Comment) object;
-        if ((this.idComment == null && other.idComment != null) || (this.idComment != null && !this.idComment.equals(other.idComment))) {
+        if ((this.idcomment == null && other.idcomment != null) || (this.idcomment != null && !this.idcomment.equals(other.idcomment))) {
             return false;
         }
         return true;
@@ -142,7 +142,7 @@ public class Comment implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tqh.pojo.Comment[ idComment=" + idComment + " ]";
+        return "com.tqh.pojo.Comment[ idcomment=" + idcomment + " ]";
     }
     
 }

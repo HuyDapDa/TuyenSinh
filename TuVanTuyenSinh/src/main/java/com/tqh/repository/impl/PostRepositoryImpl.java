@@ -69,7 +69,7 @@ public class PostRepositoryImpl implements PostRepository {
     public boolean addOrUpdatePost(Post p) {
         Session s = this.factory.getObject().getCurrentSession();
         try {
-            if (p.getIdPost() == null) {
+            if (p.getIdpost() == null) {
                 s.save(p);
             } else {
                 s.update(p);

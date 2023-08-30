@@ -34,114 +34,114 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Post.findAll", query = "SELECT p FROM Post p"),
-    @NamedQuery(name = "Post.findByIdPost", query = "SELECT p FROM Post p WHERE p.idPost = :idPost")})
+    @NamedQuery(name = "Post.findByIdpost", query = "SELECT p FROM Post p WHERE p.idpost = :idpost")})
 public class Post implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idPost")
-    private Integer idPost;
+    @Column(name = "idpost")
+    private Integer idpost;
     @Basic(optional = false)
     @NotNull
     @Lob
     @Size(min = 1, max = 2147483647)
-    @Column(name = "postInformation")
-    private String postInformation;
+    @Column(name = "postinformation")
+    private String postinformation;
     @Lob
     @Size(max = 2147483647)
-    @Column(name = "postType")
-    private String postType;
-    @JoinColumn(name = "admission_idAdmission", referencedColumnName = "idAdmission")
+    @Column(name = "posttype")
+    private String posttype;
+    @JoinColumn(name = "admission_idadmission", referencedColumnName = "idadmission")
     @ManyToOne(optional = false)
-    private Admission admissionidAdmission;
-    @JoinColumn(name = "faculty_idFaculty", referencedColumnName = "idFaculty")
+    private Admission admissionIdadmission;
+    @JoinColumn(name = "faculty_idfaculty", referencedColumnName = "idfaculty")
     @ManyToOne(optional = false)
-    private Faculty facultyidFaculty;
-    @JoinColumn(name = "users_permission_idPermission", referencedColumnName = "permission_idPermission")
+    private Faculty facultyIdfaculty;
+    @JoinColumn(name = "users_permission_idpermission", referencedColumnName = "permission_idpermission")
     @ManyToOne(optional = false)
-    private Users userspermissionidPermission;
-    @JoinColumn(name = "users_idUsers", referencedColumnName = "idUsers")
+    private Users usersPermissionIdpermission;
+    @JoinColumn(name = "users_idusers", referencedColumnName = "idusers")
     @ManyToOne(optional = false)
-    private Users usersidUsers;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postfacultyidFaculty")
+    private Users usersIdusers;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postAdmissionIdadmission")
     private Collection<Comment> commentCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postidPost")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postFacultyIdfaculty")
     private Collection<Comment> commentCollection1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postusersidUsers")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postIdpost")
     private Collection<Comment> commentCollection2;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postuserspermissionidPermission")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postUsersIdusers")
     private Collection<Comment> commentCollection3;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postadmissionidAdmission")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postUsersPermissionIdpermission")
     private Collection<Comment> commentCollection4;
 
     public Post() {
     }
 
-    public Post(Integer idPost) {
-        this.idPost = idPost;
+    public Post(Integer idpost) {
+        this.idpost = idpost;
     }
 
-    public Post(Integer idPost, String postInformation) {
-        this.idPost = idPost;
-        this.postInformation = postInformation;
+    public Post(Integer idpost, String postinformation) {
+        this.idpost = idpost;
+        this.postinformation = postinformation;
     }
 
-    public Integer getIdPost() {
-        return idPost;
+    public Integer getIdpost() {
+        return idpost;
     }
 
-    public void setIdPost(Integer idPost) {
-        this.idPost = idPost;
+    public void setIdpost(Integer idpost) {
+        this.idpost = idpost;
     }
 
-    public String getPostInformation() {
-        return postInformation;
+    public String getPostinformation() {
+        return postinformation;
     }
 
-    public void setPostInformation(String postInformation) {
-        this.postInformation = postInformation;
+    public void setPostinformation(String postinformation) {
+        this.postinformation = postinformation;
     }
 
-    public String getPostType() {
-        return postType;
+    public String getPosttype() {
+        return posttype;
     }
 
-    public void setPostType(String postType) {
-        this.postType = postType;
+    public void setPosttype(String posttype) {
+        this.posttype = posttype;
     }
 
-    public Admission getAdmissionidAdmission() {
-        return admissionidAdmission;
+    public Admission getAdmissionIdadmission() {
+        return admissionIdadmission;
     }
 
-    public void setAdmissionidAdmission(Admission admissionidAdmission) {
-        this.admissionidAdmission = admissionidAdmission;
+    public void setAdmissionIdadmission(Admission admissionIdadmission) {
+        this.admissionIdadmission = admissionIdadmission;
     }
 
-    public Faculty getFacultyidFaculty() {
-        return facultyidFaculty;
+    public Faculty getFacultyIdfaculty() {
+        return facultyIdfaculty;
     }
 
-    public void setFacultyidFaculty(Faculty facultyidFaculty) {
-        this.facultyidFaculty = facultyidFaculty;
+    public void setFacultyIdfaculty(Faculty facultyIdfaculty) {
+        this.facultyIdfaculty = facultyIdfaculty;
     }
 
-    public Users getUserspermissionidPermission() {
-        return userspermissionidPermission;
+    public Users getUsersPermissionIdpermission() {
+        return usersPermissionIdpermission;
     }
 
-    public void setUserspermissionidPermission(Users userspermissionidPermission) {
-        this.userspermissionidPermission = userspermissionidPermission;
+    public void setUsersPermissionIdpermission(Users usersPermissionIdpermission) {
+        this.usersPermissionIdpermission = usersPermissionIdpermission;
     }
 
-    public Users getUsersidUsers() {
-        return usersidUsers;
+    public Users getUsersIdusers() {
+        return usersIdusers;
     }
 
-    public void setUsersidUsers(Users usersidUsers) {
-        this.usersidUsers = usersidUsers;
+    public void setUsersIdusers(Users usersIdusers) {
+        this.usersIdusers = usersIdusers;
     }
 
     @XmlTransient
@@ -192,7 +192,7 @@ public class Post implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idPost != null ? idPost.hashCode() : 0);
+        hash += (idpost != null ? idpost.hashCode() : 0);
         return hash;
     }
 
@@ -203,7 +203,7 @@ public class Post implements Serializable {
             return false;
         }
         Post other = (Post) object;
-        if ((this.idPost == null && other.idPost != null) || (this.idPost != null && !this.idPost.equals(other.idPost))) {
+        if ((this.idpost == null && other.idpost != null) || (this.idpost != null && !this.idpost.equals(other.idpost))) {
             return false;
         }
         return true;
@@ -211,7 +211,7 @@ public class Post implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tqh.pojo.Post[ idPost=" + idPost + " ]";
+        return "com.tqh.pojo.Post[ idpost=" + idpost + " ]";
     }
     
 }

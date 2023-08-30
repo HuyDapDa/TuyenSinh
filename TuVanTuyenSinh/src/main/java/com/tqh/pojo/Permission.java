@@ -7,7 +7,6 @@ package com.tqh.pojo;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -29,50 +28,50 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Permission.findAll", query = "SELECT p FROM Permission p"),
-    @NamedQuery(name = "Permission.findByIdPermission", query = "SELECT p FROM Permission p WHERE p.idPermission = :idPermission"),
-    @NamedQuery(name = "Permission.findByPermissionName", query = "SELECT p FROM Permission p WHERE p.permissionName = :permissionName")})
+    @NamedQuery(name = "Permission.findByIdpermission", query = "SELECT p FROM Permission p WHERE p.idpermission = :idpermission"),
+    @NamedQuery(name = "Permission.findByPermissionname", query = "SELECT p FROM Permission p WHERE p.permissionname = :permissionname")})
 public class Permission implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "idPermission")
-    private Integer idPermission;
+    @Column(name = "idpermission")
+    private Integer idpermission;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "permissionName")
-    private String permissionName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "permissionidPermission")
+    @Column(name = "permissionname")
+    private String permissionname;
+    @OneToMany(mappedBy = "permissionIdpermission")
     private Collection<Users> usersCollection;
 
     public Permission() {
     }
 
-    public Permission(Integer idPermission) {
-        this.idPermission = idPermission;
+    public Permission(Integer idpermission) {
+        this.idpermission = idpermission;
     }
 
-    public Permission(Integer idPermission, String permissionName) {
-        this.idPermission = idPermission;
-        this.permissionName = permissionName;
+    public Permission(Integer idpermission, String permissionname) {
+        this.idpermission = idpermission;
+        this.permissionname = permissionname;
     }
 
-    public Integer getIdPermission() {
-        return idPermission;
+    public Integer getIdpermission() {
+        return idpermission;
     }
 
-    public void setIdPermission(Integer idPermission) {
-        this.idPermission = idPermission;
+    public void setIdpermission(Integer idpermission) {
+        this.idpermission = idpermission;
     }
 
-    public String getPermissionName() {
-        return permissionName;
+    public String getPermissionname() {
+        return permissionname;
     }
 
-    public void setPermissionName(String permissionName) {
-        this.permissionName = permissionName;
+    public void setPermissionname(String permissionname) {
+        this.permissionname = permissionname;
     }
 
     @XmlTransient
@@ -87,7 +86,7 @@ public class Permission implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idPermission != null ? idPermission.hashCode() : 0);
+        hash += (idpermission != null ? idpermission.hashCode() : 0);
         return hash;
     }
 
@@ -98,7 +97,7 @@ public class Permission implements Serializable {
             return false;
         }
         Permission other = (Permission) object;
-        if ((this.idPermission == null && other.idPermission != null) || (this.idPermission != null && !this.idPermission.equals(other.idPermission))) {
+        if ((this.idpermission == null && other.idpermission != null) || (this.idpermission != null && !this.idpermission.equals(other.idpermission))) {
             return false;
         }
         return true;
@@ -106,7 +105,7 @@ public class Permission implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tqh.pojo.Permission[ idPermission=" + idPermission + " ]";
+        return "com.tqh.pojo.Permission[ idpermission=" + idpermission + " ]";
     }
     
 }

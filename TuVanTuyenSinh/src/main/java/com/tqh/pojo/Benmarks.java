@@ -31,12 +31,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Benmarks.findAll", query = "SELECT b FROM Benmarks b"),
-    @NamedQuery(name = "Benmarks.findByIdBenmarks", query = "SELECT b FROM Benmarks b WHERE b.idBenmarks = :idBenmarks"),
+    @NamedQuery(name = "Benmarks.findByIdbenmarks", query = "SELECT b FROM Benmarks b WHERE b.idbenmarks = :idbenmarks"),
     @NamedQuery(name = "Benmarks.findByYear", query = "SELECT b FROM Benmarks b WHERE b.year = :year"),
-    @NamedQuery(name = "Benmarks.findByDiemHocBa", query = "SELECT b FROM Benmarks b WHERE b.diemHocBa = :diemHocBa"),
-    @NamedQuery(name = "Benmarks.findByDiemTHPT", query = "SELECT b FROM Benmarks b WHERE b.diemTHPT = :diemTHPT"),
-    @NamedQuery(name = "Benmarks.findByDiemDGNL", query = "SELECT b FROM Benmarks b WHERE b.diemDGNL = :diemDGNL"),
-    @NamedQuery(name = "Benmarks.findByBenmarkscol", query = "SELECT b FROM Benmarks b WHERE b.benmarkscol = :benmarkscol"),
+    @NamedQuery(name = "Benmarks.findByDiemhocba", query = "SELECT b FROM Benmarks b WHERE b.diemhocba = :diemhocba"),
+    @NamedQuery(name = "Benmarks.findByDiemthpt", query = "SELECT b FROM Benmarks b WHERE b.diemthpt = :diemthpt"),
+    @NamedQuery(name = "Benmarks.findByDiemdgnl", query = "SELECT b FROM Benmarks b WHERE b.diemdgnl = :diemdgnl"),
     @NamedQuery(name = "Benmarks.findByFacultyidFaculty", query = "SELECT b FROM Benmarks b WHERE b.facultyidFaculty = :facultyidFaculty")})
 public class Benmarks implements Serializable {
 
@@ -44,46 +43,43 @@ public class Benmarks implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idBenmarks")
-    private Integer idBenmarks;
+    @Column(name = "idbenmarks")
+    private Integer idbenmarks;
     @Size(max = 45)
     @Column(name = "year")
     private String year;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "diemHocBa")
-    private Double diemHocBa;
-    @Column(name = "diemTHPT")
-    private Double diemTHPT;
-    @Column(name = "diemDGNL")
-    private Double diemDGNL;
-    @Size(max = 45)
-    @Column(name = "benmarkscol")
-    private String benmarkscol;
+    @Column(name = "diemhocba")
+    private Double diemhocba;
+    @Column(name = "diemthpt")
+    private Double diemthpt;
+    @Column(name = "diemdgnl")
+    private Double diemdgnl;
     @Basic(optional = false)
     @NotNull
     @Column(name = "faculty_idFaculty")
     private int facultyidFaculty;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "benmarksidBenmarks")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "benmarksIdbenmarks")
     private Collection<Faculty> facultyCollection;
 
     public Benmarks() {
     }
 
-    public Benmarks(Integer idBenmarks) {
-        this.idBenmarks = idBenmarks;
+    public Benmarks(Integer idbenmarks) {
+        this.idbenmarks = idbenmarks;
     }
 
-    public Benmarks(Integer idBenmarks, int facultyidFaculty) {
-        this.idBenmarks = idBenmarks;
+    public Benmarks(Integer idbenmarks, int facultyidFaculty) {
+        this.idbenmarks = idbenmarks;
         this.facultyidFaculty = facultyidFaculty;
     }
 
-    public Integer getIdBenmarks() {
-        return idBenmarks;
+    public Integer getIdbenmarks() {
+        return idbenmarks;
     }
 
-    public void setIdBenmarks(Integer idBenmarks) {
-        this.idBenmarks = idBenmarks;
+    public void setIdbenmarks(Integer idbenmarks) {
+        this.idbenmarks = idbenmarks;
     }
 
     public String getYear() {
@@ -94,36 +90,28 @@ public class Benmarks implements Serializable {
         this.year = year;
     }
 
-    public Double getDiemHocBa() {
-        return diemHocBa;
+    public Double getDiemhocba() {
+        return diemhocba;
     }
 
-    public void setDiemHocBa(Double diemHocBa) {
-        this.diemHocBa = diemHocBa;
+    public void setDiemhocba(Double diemhocba) {
+        this.diemhocba = diemhocba;
     }
 
-    public Double getDiemTHPT() {
-        return diemTHPT;
+    public Double getDiemthpt() {
+        return diemthpt;
     }
 
-    public void setDiemTHPT(Double diemTHPT) {
-        this.diemTHPT = diemTHPT;
+    public void setDiemthpt(Double diemthpt) {
+        this.diemthpt = diemthpt;
     }
 
-    public Double getDiemDGNL() {
-        return diemDGNL;
+    public Double getDiemdgnl() {
+        return diemdgnl;
     }
 
-    public void setDiemDGNL(Double diemDGNL) {
-        this.diemDGNL = diemDGNL;
-    }
-
-    public String getBenmarkscol() {
-        return benmarkscol;
-    }
-
-    public void setBenmarkscol(String benmarkscol) {
-        this.benmarkscol = benmarkscol;
+    public void setDiemdgnl(Double diemdgnl) {
+        this.diemdgnl = diemdgnl;
     }
 
     public int getFacultyidFaculty() {
@@ -146,7 +134,7 @@ public class Benmarks implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idBenmarks != null ? idBenmarks.hashCode() : 0);
+        hash += (idbenmarks != null ? idbenmarks.hashCode() : 0);
         return hash;
     }
 
@@ -157,7 +145,7 @@ public class Benmarks implements Serializable {
             return false;
         }
         Benmarks other = (Benmarks) object;
-        if ((this.idBenmarks == null && other.idBenmarks != null) || (this.idBenmarks != null && !this.idBenmarks.equals(other.idBenmarks))) {
+        if ((this.idbenmarks == null && other.idbenmarks != null) || (this.idbenmarks != null && !this.idbenmarks.equals(other.idbenmarks))) {
             return false;
         }
         return true;
@@ -165,7 +153,7 @@ public class Benmarks implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tqh.pojo.Benmarks[ idBenmarks=" + idBenmarks + " ]";
+        return "com.tqh.pojo.Benmarks[ idbenmarks=" + idbenmarks + " ]";
     }
     
 }

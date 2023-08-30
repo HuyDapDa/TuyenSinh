@@ -29,50 +29,50 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Admission.findAll", query = "SELECT a FROM Admission a"),
-    @NamedQuery(name = "Admission.findByIdAdmission", query = "SELECT a FROM Admission a WHERE a.idAdmission = :idAdmission"),
-    @NamedQuery(name = "Admission.findByTypeOfTraining", query = "SELECT a FROM Admission a WHERE a.typeOfTraining = :typeOfTraining")})
+    @NamedQuery(name = "Admission.findByIdadmission", query = "SELECT a FROM Admission a WHERE a.idadmission = :idadmission"),
+    @NamedQuery(name = "Admission.findByTypeoftraining", query = "SELECT a FROM Admission a WHERE a.typeoftraining = :typeoftraining")})
 public class Admission implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "idAdmission")
-    private Integer idAdmission;
+    @Column(name = "idadmission")
+    private Integer idadmission;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "typeOfTraining")
-    private String typeOfTraining;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "admissionidAdmission")
+    @Column(name = "typeoftraining")
+    private String typeoftraining;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "admissionIdadmission")
     private Collection<Post> postCollection;
 
     public Admission() {
     }
 
-    public Admission(Integer idAdmission) {
-        this.idAdmission = idAdmission;
+    public Admission(Integer idadmission) {
+        this.idadmission = idadmission;
     }
 
-    public Admission(Integer idAdmission, String typeOfTraining) {
-        this.idAdmission = idAdmission;
-        this.typeOfTraining = typeOfTraining;
+    public Admission(Integer idadmission, String typeoftraining) {
+        this.idadmission = idadmission;
+        this.typeoftraining = typeoftraining;
     }
 
-    public Integer getIdAdmission() {
-        return idAdmission;
+    public Integer getIdadmission() {
+        return idadmission;
     }
 
-    public void setIdAdmission(Integer idAdmission) {
-        this.idAdmission = idAdmission;
+    public void setIdadmission(Integer idadmission) {
+        this.idadmission = idadmission;
     }
 
-    public String getTypeOfTraining() {
-        return typeOfTraining;
+    public String getTypeoftraining() {
+        return typeoftraining;
     }
 
-    public void setTypeOfTraining(String typeOfTraining) {
-        this.typeOfTraining = typeOfTraining;
+    public void setTypeoftraining(String typeoftraining) {
+        this.typeoftraining = typeoftraining;
     }
 
     @XmlTransient
@@ -87,7 +87,7 @@ public class Admission implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idAdmission != null ? idAdmission.hashCode() : 0);
+        hash += (idadmission != null ? idadmission.hashCode() : 0);
         return hash;
     }
 
@@ -98,7 +98,7 @@ public class Admission implements Serializable {
             return false;
         }
         Admission other = (Admission) object;
-        if ((this.idAdmission == null && other.idAdmission != null) || (this.idAdmission != null && !this.idAdmission.equals(other.idAdmission))) {
+        if ((this.idadmission == null && other.idadmission != null) || (this.idadmission != null && !this.idadmission.equals(other.idadmission))) {
             return false;
         }
         return true;
@@ -106,7 +106,7 @@ public class Admission implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tqh.pojo.Admission[ idAdmission=" + idAdmission + " ]";
+        return "com.tqh.pojo.Admission[ idadmission=" + idadmission + " ]";
     }
     
 }

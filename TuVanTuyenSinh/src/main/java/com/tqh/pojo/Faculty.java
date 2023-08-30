@@ -33,64 +33,64 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Faculty.findAll", query = "SELECT f FROM Faculty f"),
-    @NamedQuery(name = "Faculty.findByIdFaculty", query = "SELECT f FROM Faculty f WHERE f.idFaculty = :idFaculty"),
-    @NamedQuery(name = "Faculty.findByFacultyName", query = "SELECT f FROM Faculty f WHERE f.facultyName = :facultyName"),
+    @NamedQuery(name = "Faculty.findByIdfaculty", query = "SELECT f FROM Faculty f WHERE f.idfaculty = :idfaculty"),
+    @NamedQuery(name = "Faculty.findByFacultyname", query = "SELECT f FROM Faculty f WHERE f.facultyname = :facultyname"),
     @NamedQuery(name = "Faculty.findByWebsite", query = "SELECT f FROM Faculty f WHERE f.website = :website"),
-    @NamedQuery(name = "Faculty.findByIntroVideo", query = "SELECT f FROM Faculty f WHERE f.introVideo = :introVideo")})
+    @NamedQuery(name = "Faculty.findByIntrovideo", query = "SELECT f FROM Faculty f WHERE f.introvideo = :introvideo")})
 public class Faculty implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idFaculty")
-    private Integer idFaculty;
+    @Column(name = "idfaculty")
+    private Integer idfaculty;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "facultyName")
-    private String facultyName;
+    @Column(name = "facultyname")
+    private String facultyname;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "website")
     private String website;
     @Size(max = 45)
-    @Column(name = "introVideo")
-    private String introVideo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "facultyidFaculty")
+    @Column(name = "introvideo")
+    private String introvideo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "facultyIdfaculty")
     private Collection<Post> postCollection;
-    @JoinColumn(name = "benmarks_idBenmarks", referencedColumnName = "idBenmarks")
+    @JoinColumn(name = "benmarks_idbenmarks", referencedColumnName = "idbenmarks")
     @ManyToOne(optional = false)
-    private Benmarks benmarksidBenmarks;
+    private Benmarks benmarksIdbenmarks;
 
     public Faculty() {
     }
 
-    public Faculty(Integer idFaculty) {
-        this.idFaculty = idFaculty;
+    public Faculty(Integer idfaculty) {
+        this.idfaculty = idfaculty;
     }
 
-    public Faculty(Integer idFaculty, String facultyName, String website) {
-        this.idFaculty = idFaculty;
-        this.facultyName = facultyName;
+    public Faculty(Integer idfaculty, String facultyname, String website) {
+        this.idfaculty = idfaculty;
+        this.facultyname = facultyname;
         this.website = website;
     }
 
-    public Integer getIdFaculty() {
-        return idFaculty;
+    public Integer getIdfaculty() {
+        return idfaculty;
     }
 
-    public void setIdFaculty(Integer idFaculty) {
-        this.idFaculty = idFaculty;
+    public void setIdfaculty(Integer idfaculty) {
+        this.idfaculty = idfaculty;
     }
 
-    public String getFacultyName() {
-        return facultyName;
+    public String getFacultyname() {
+        return facultyname;
     }
 
-    public void setFacultyName(String facultyName) {
-        this.facultyName = facultyName;
+    public void setFacultyname(String facultyname) {
+        this.facultyname = facultyname;
     }
 
     public String getWebsite() {
@@ -101,12 +101,12 @@ public class Faculty implements Serializable {
         this.website = website;
     }
 
-    public String getIntroVideo() {
-        return introVideo;
+    public String getIntrovideo() {
+        return introvideo;
     }
 
-    public void setIntroVideo(String introVideo) {
-        this.introVideo = introVideo;
+    public void setIntrovideo(String introvideo) {
+        this.introvideo = introvideo;
     }
 
     @XmlTransient
@@ -118,18 +118,18 @@ public class Faculty implements Serializable {
         this.postCollection = postCollection;
     }
 
-    public Benmarks getBenmarksidBenmarks() {
-        return benmarksidBenmarks;
+    public Benmarks getBenmarksIdbenmarks() {
+        return benmarksIdbenmarks;
     }
 
-    public void setBenmarksidBenmarks(Benmarks benmarksidBenmarks) {
-        this.benmarksidBenmarks = benmarksidBenmarks;
+    public void setBenmarksIdbenmarks(Benmarks benmarksIdbenmarks) {
+        this.benmarksIdbenmarks = benmarksIdbenmarks;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idFaculty != null ? idFaculty.hashCode() : 0);
+        hash += (idfaculty != null ? idfaculty.hashCode() : 0);
         return hash;
     }
 
@@ -140,7 +140,7 @@ public class Faculty implements Serializable {
             return false;
         }
         Faculty other = (Faculty) object;
-        if ((this.idFaculty == null && other.idFaculty != null) || (this.idFaculty != null && !this.idFaculty.equals(other.idFaculty))) {
+        if ((this.idfaculty == null && other.idfaculty != null) || (this.idfaculty != null && !this.idfaculty.equals(other.idfaculty))) {
             return false;
         }
         return true;
@@ -148,7 +148,7 @@ public class Faculty implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tqh.pojo.Faculty[ idFaculty=" + idFaculty + " ]";
+        return "com.tqh.pojo.Faculty[ idfaculty=" + idfaculty + " ]";
     }
     
 }
