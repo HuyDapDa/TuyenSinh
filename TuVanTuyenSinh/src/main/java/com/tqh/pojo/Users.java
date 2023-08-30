@@ -5,9 +5,7 @@
 package com.tqh.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,12 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -77,12 +73,8 @@ public class Users implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "User_Role")
     private String userRole;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userspermissionidPermission")
-    private Collection<Post> postCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersidUsers")
-    private Collection<Post> postCollection1;
     @JoinColumn(name = "permission_idPermission", referencedColumnName = "idPermission")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Permission permissionidPermission;
 
     public Users() {
@@ -161,24 +153,6 @@ public class Users implements Serializable {
 
     public void setUserRole(String userRole) {
         this.userRole = userRole;
-    }
-
-    @XmlTransient
-    public Collection<Post> getPostCollection() {
-        return postCollection;
-    }
-
-    public void setPostCollection(Collection<Post> postCollection) {
-        this.postCollection = postCollection;
-    }
-
-    @XmlTransient
-    public Collection<Post> getPostCollection1() {
-        return postCollection1;
-    }
-
-    public void setPostCollection1(Collection<Post> postCollection1) {
-        this.postCollection1 = postCollection1;
     }
 
     public Permission getPermissionidPermission() {

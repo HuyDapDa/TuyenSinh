@@ -5,6 +5,7 @@ com\tqh\service\PostService.class
 com\tqh\pojo\Post_.class
 com\tqh\configs\DispatcherServletInit.class
 com\tqh\pojo\Permission.class
+com\tqh\repository\impl\AdmissionRepositoryImpl.class
 com\tqh\pojo\Permission_.class
 com\tqh\pojo\Faculty_.class
 com\tqh\pojo\Users_.class
@@ -13,13 +14,16 @@ com\tqh\pojo\Users.class
 com\tqh\controllers\UserController.class
 com\tqh\configs\HibernateConfig.class
 com\tqh\configs\TilesConfigs.class
+com\tqh\service\AdmissionService.class
 com\tqh\pojo\Faculty.class
 com\tqh\pojo\Admission.class
 com\tqh\pojo\Comment.class
 com\tqh\pojo\Comment_.class
 com\tqh\repository\PostRepository.class
 com\tqh\service\UserService.class
+com\tqh\service\impl\AdmissionServiceImpl.class
 com\tqh\pojo\Post.class
+com\tqh\repository\AdmissionRepository.class
 com\tqh\controllers\IndexController.class
 com\tqh\pojo\Admission_.class
 com\tqh\repository\impl\PostRepositoryImpl.class
