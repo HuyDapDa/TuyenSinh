@@ -34,8 +34,6 @@
         </div>
         <tiles:insertAttribute name="footer" />
 
-
-
         <script src="<c:url value="/assets/js/jquery.min.js" />"></script>
         <script src="<c:url value="/assets/js/popper.js"/>"></script>
         <script src="<c:url value="/assets/js/bootstrap.min.js"/>"></script>

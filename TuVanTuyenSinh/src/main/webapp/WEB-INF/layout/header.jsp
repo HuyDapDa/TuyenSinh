@@ -43,8 +43,8 @@
                 <span class="fa fa-bars"></span> Menu
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav m-auto justify-content-center">
-                    <li class="nav-item active"><a href="${action}" class="nav-link">Trang Chủ</a></li>
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item active"><a href="<c:url value='/'/>" class="nav-link">Trang Chủ</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hệ</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -67,13 +67,33 @@
                             <a class="dropdown-item" href="#">Xã hội học</a>
                         </div>
                     </li>
+
                 </ul>
             </div>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a href="<c:url value="/login" />" class="nav-link">Đăng Nhập</a>
-                </li>
+                <c:choose>
+                    <c:when test="${pageContext.request.userPrincipal.name != null}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value='/' />">
+                                <img src="<c:url value='https://res.cloudinary.com/duvo8z7fa/image/upload/v1690006526/tg5yok1dfow8ndhfwgyw.jpg'/>" alt="Avatar" class="avatar" width="30", height="20">
+                                ${pageContext.request.userPrincipal.name}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" margin="10px" href="<c:url value='/logout' />">Đăng Xuất</a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="nav-item">
+                            <a href="<c:url value='/login' />" class="nav-link">Đăng Nhập</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<c:url value='/register' />" class="nav-link">Đăng Ký</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
+
         </div>
     </nav>
     <!-- END nav -->

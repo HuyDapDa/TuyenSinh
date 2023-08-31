@@ -5,7 +5,7 @@
 package com.tqh.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -47,6 +47,12 @@ public class Post implements Serializable {
     @NotNull
     @Lob
     @Size(min = 1, max = 2147483647)
+    @Column(name = "postName")
+    private String postName;
+    @Basic(optional = false)
+    @NotNull
+    @Lob
+    @Size(min = 1, max = 2147483647)
     @Column(name = "postinformation")
     private String postinformation;
     @Lob
@@ -59,22 +65,17 @@ public class Post implements Serializable {
     @JoinColumn(name = "faculty_idfaculty", referencedColumnName = "idfaculty")
     @ManyToOne(optional = false)
     private Faculty facultyIdfaculty;
-    @JoinColumn(name = "users_permission_idpermission", referencedColumnName = "permission_idpermission")
-    @ManyToOne(optional = false)
-    private Users usersPermissionIdpermission;
     @JoinColumn(name = "users_idusers", referencedColumnName = "idusers")
     @ManyToOne(optional = false)
     private Users usersIdusers;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "postAdmissionIdadmission")
-    private Collection<Comment> commentCollection;
+    private Set<Comment> commentSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "postFacultyIdfaculty")
-    private Collection<Comment> commentCollection1;
+    private Set<Comment> commentSet1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "postIdpost")
-    private Collection<Comment> commentCollection2;
+    private Set<Comment> commentSet2;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "postUsersIdusers")
-    private Collection<Comment> commentCollection3;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postUsersPermissionIdpermission")
-    private Collection<Comment> commentCollection4;
+    private Set<Comment> commentSet3;
 
     public Post() {
     }
@@ -83,8 +84,9 @@ public class Post implements Serializable {
         this.idpost = idpost;
     }
 
-    public Post(Integer idpost, String postinformation) {
+    public Post(Integer idpost, String postName, String postinformation) {
         this.idpost = idpost;
+        this.postName = postName;
         this.postinformation = postinformation;
     }
 
@@ -94,6 +96,14 @@ public class Post implements Serializable {
 
     public void setIdpost(Integer idpost) {
         this.idpost = idpost;
+    }
+
+    public String getPostName() {
+        return postName;
+    }
+
+    public void setPostName(String postName) {
+        this.postName = postName;
     }
 
     public String getPostinformation() {
@@ -128,14 +138,6 @@ public class Post implements Serializable {
         this.facultyIdfaculty = facultyIdfaculty;
     }
 
-    public Users getUsersPermissionIdpermission() {
-        return usersPermissionIdpermission;
-    }
-
-    public void setUsersPermissionIdpermission(Users usersPermissionIdpermission) {
-        this.usersPermissionIdpermission = usersPermissionIdpermission;
-    }
-
     public Users getUsersIdusers() {
         return usersIdusers;
     }
@@ -145,48 +147,39 @@ public class Post implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Comment> getCommentCollection() {
-        return commentCollection;
+    public Set<Comment> getCommentSet() {
+        return commentSet;
     }
 
-    public void setCommentCollection(Collection<Comment> commentCollection) {
-        this.commentCollection = commentCollection;
-    }
-
-    @XmlTransient
-    public Collection<Comment> getCommentCollection1() {
-        return commentCollection1;
-    }
-
-    public void setCommentCollection1(Collection<Comment> commentCollection1) {
-        this.commentCollection1 = commentCollection1;
+    public void setCommentSet(Set<Comment> commentSet) {
+        this.commentSet = commentSet;
     }
 
     @XmlTransient
-    public Collection<Comment> getCommentCollection2() {
-        return commentCollection2;
+    public Set<Comment> getCommentSet1() {
+        return commentSet1;
     }
 
-    public void setCommentCollection2(Collection<Comment> commentCollection2) {
-        this.commentCollection2 = commentCollection2;
-    }
-
-    @XmlTransient
-    public Collection<Comment> getCommentCollection3() {
-        return commentCollection3;
-    }
-
-    public void setCommentCollection3(Collection<Comment> commentCollection3) {
-        this.commentCollection3 = commentCollection3;
+    public void setCommentSet1(Set<Comment> commentSet1) {
+        this.commentSet1 = commentSet1;
     }
 
     @XmlTransient
-    public Collection<Comment> getCommentCollection4() {
-        return commentCollection4;
+    public Set<Comment> getCommentSet2() {
+        return commentSet2;
     }
 
-    public void setCommentCollection4(Collection<Comment> commentCollection4) {
-        this.commentCollection4 = commentCollection4;
+    public void setCommentSet2(Set<Comment> commentSet2) {
+        this.commentSet2 = commentSet2;
+    }
+
+    @XmlTransient
+    public Set<Comment> getCommentSet3() {
+        return commentSet3;
+    }
+
+    public void setCommentSet3(Set<Comment> commentSet3) {
+        this.commentSet3 = commentSet3;
     }
 
     @Override

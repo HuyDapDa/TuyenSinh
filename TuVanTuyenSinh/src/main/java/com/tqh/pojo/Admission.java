@@ -5,7 +5,7 @@
 package com.tqh.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,7 +45,7 @@ public class Admission implements Serializable {
     @Column(name = "typeoftraining")
     private String typeoftraining;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "admissionIdadmission")
-    private Collection<Post> postCollection;
+    private Set<Post> postSet;
 
     public Admission() {
     }
@@ -76,12 +76,12 @@ public class Admission implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Post> getPostCollection() {
-        return postCollection;
+    public Set<Post> getPostSet() {
+        return postSet;
     }
 
-    public void setPostCollection(Collection<Post> postCollection) {
-        this.postCollection = postCollection;
+    public void setPostSet(Set<Post> postSet) {
+        this.postSet = postSet;
     }
 
     @Override

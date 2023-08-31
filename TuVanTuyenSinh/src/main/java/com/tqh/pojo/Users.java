@@ -5,7 +5,7 @@
 package com.tqh.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -65,7 +65,7 @@ public class Users implements Serializable {
     private String username;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 255)
     @Column(name = "password")
     private String password;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
@@ -77,13 +77,17 @@ public class Users implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "user_role")
     private String userRole;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersPermissionIdpermission")
-    private Collection<Post> postCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersIdusers")
-    private Collection<Post> postCollection1;
-    @JoinColumn(name = "permission_idpermission", referencedColumnName = "idpermission")
-    @ManyToOne
-    private Permission permissionIdpermission;
+    private Set<Post> postSet;
+    @JoinColumn(name = "banner_idbanner", referencedColumnName = "idbanner")
+    @ManyToOne(optional = false)
+    private Banner bannerIdbanner;
+    @JoinColumn(name = "school_idschool", referencedColumnName = "idschool")
+    @ManyToOne(optional = false)
+    private School schoolIdschool;
+    @JoinColumn(name = "userrole_iduserrole", referencedColumnName = "iduserrole")
+    @ManyToOne(optional = false)
+    private Userrole userroleIduserrole;
 
     public Users() {
     }
@@ -164,29 +168,36 @@ public class Users implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Post> getPostCollection() {
-        return postCollection;
+    public Set<Post> getPostSet() {
+        return postSet;
     }
 
-    public void setPostCollection(Collection<Post> postCollection) {
-        this.postCollection = postCollection;
+    public void setPostSet(Set<Post> postSet) {
+        this.postSet = postSet;
     }
 
-    @XmlTransient
-    public Collection<Post> getPostCollection1() {
-        return postCollection1;
+    public Banner getBannerIdbanner() {
+        return bannerIdbanner;
     }
 
-    public void setPostCollection1(Collection<Post> postCollection1) {
-        this.postCollection1 = postCollection1;
+    public void setBannerIdbanner(Banner bannerIdbanner) {
+        this.bannerIdbanner = bannerIdbanner;
     }
 
-    public Permission getPermissionIdpermission() {
-        return permissionIdpermission;
+    public School getSchoolIdschool() {
+        return schoolIdschool;
     }
 
-    public void setPermissionIdpermission(Permission permissionIdpermission) {
-        this.permissionIdpermission = permissionIdpermission;
+    public void setSchoolIdschool(School schoolIdschool) {
+        this.schoolIdschool = schoolIdschool;
+    }
+
+    public Userrole getUserroleIduserrole() {
+        return userroleIduserrole;
+    }
+
+    public void setUserroleIduserrole(Userrole userroleIduserrole) {
+        this.userroleIduserrole = userroleIduserrole;
     }
 
     @Override

@@ -53,9 +53,6 @@ public class Comment implements Serializable {
     @JoinColumn(name = "post_users_idusers", referencedColumnName = "users_idusers")
     @ManyToOne(optional = false)
     private Post postUsersIdusers;
-    @JoinColumn(name = "post_users_permission_idpermission", referencedColumnName = "users_permission_idpermission")
-    @ManyToOne(optional = false)
-    private Post postUsersPermissionIdpermission;
 
     public Comment() {
     }
@@ -110,14 +107,6 @@ public class Comment implements Serializable {
 
     public void setPostUsersIdusers(Post postUsersIdusers) {
         this.postUsersIdusers = postUsersIdusers;
-    }
-
-    public Post getPostUsersPermissionIdpermission() {
-        return postUsersPermissionIdpermission;
-    }
-
-    public void setPostUsersPermissionIdpermission(Post postUsersPermissionIdpermission) {
-        this.postUsersPermissionIdpermission = postUsersPermissionIdpermission;
     }
 
     @Override

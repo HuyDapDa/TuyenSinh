@@ -23,6 +23,8 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
 /**
  *
@@ -59,53 +61,53 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     
     
 
-//    @Bean
-//    public InternalResourceViewResolver internalResourceViewResolver() {
-//        InternalResourceViewResolver r = new InternalResourceViewResolver();
-//        r.setViewClass(JstlView.class);
-//        r.setPrefix("/WEB-INF/pages/");
-//        r.setSuffix(".jsp");
-//        
-//        return r;
-//    }
-//    @Bean
-//    public Cloudinary cloudinary() {
-//        Cloudinary cloudinary
-//                = new Cloudinary(ObjectUtils.asMap(
-//                        "cloud_name", this.env.getProperty("cloudinary.cloud_name"),
-//                        "api_key", this.env.getProperty("cloudinary.api_id"),
-//                        "api_secret", this.env.getProperty("cloudinary.api_secret"),
-//                        "secure", true));
-//        return cloudinary;
-//    }
-//
-//    @Bean
-//    public CommonsMultipartResolver multipartResolver() {
-//        CommonsMultipartResolver resolver
-//                = new CommonsMultipartResolver();
-//        resolver.setDefaultEncoding("UTF-8");
-//        return resolver;
-//    }
-//
-//    @Bean
-//    public MessageSource messageSource() {
-//        ResourceBundleMessageSource m = new ResourceBundleMessageSource();
-//
-//        m.setBasenames("messages");
-//
-//        return m;
-//    }
-//
-//    @Bean(name = "validator")
-//    public LocalValidatorFactoryBean validator() {
-//        LocalValidatorFactoryBean bean
-//                = new LocalValidatorFactoryBean();
-//        bean.setValidationMessageSource(messageSource());
-//        return bean;
-//    }
-//
-//    @Override
-//    public Validator getValidator() {
-//        return validator();
-//    }
+    @Bean
+    public InternalResourceViewResolver internalResourceViewResolver() {
+        InternalResourceViewResolver r = new InternalResourceViewResolver();
+        r.setViewClass(JstlView.class);
+        r.setPrefix("/WEB-INF/pages/");
+        r.setSuffix(".jsp");
+        
+        return r;
+    }
+    @Bean
+    public Cloudinary cloudinary() {
+        Cloudinary cloudinary
+                = new Cloudinary(ObjectUtils.asMap(
+                        "cloud_name", this.env.getProperty("cloudinary.cloud_name"),
+                        "api_key", this.env.getProperty("cloudinary.api_id"),
+                        "api_secret", this.env.getProperty("cloudinary.api_secret"),
+                        "secure", true));
+        return cloudinary;
+    }
+
+    @Bean
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver resolver
+                = new CommonsMultipartResolver();
+        resolver.setDefaultEncoding("UTF-8");
+        return resolver;
+    }
+
+    @Bean
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource m = new ResourceBundleMessageSource();
+
+        m.setBasenames("messages");
+
+        return m;
+    }
+
+    @Bean(name = "validator")
+    public LocalValidatorFactoryBean validator() {
+        LocalValidatorFactoryBean bean
+                = new LocalValidatorFactoryBean();
+        bean.setValidationMessageSource(messageSource());
+        return bean;
+    }
+
+    @Override
+    public Validator getValidator() {
+        return validator();
+    }
 }

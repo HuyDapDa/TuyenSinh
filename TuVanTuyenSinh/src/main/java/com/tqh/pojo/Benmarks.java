@@ -5,7 +5,7 @@
 package com.tqh.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,7 +17,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -35,8 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Benmarks.findByYear", query = "SELECT b FROM Benmarks b WHERE b.year = :year"),
     @NamedQuery(name = "Benmarks.findByDiemhocba", query = "SELECT b FROM Benmarks b WHERE b.diemhocba = :diemhocba"),
     @NamedQuery(name = "Benmarks.findByDiemthpt", query = "SELECT b FROM Benmarks b WHERE b.diemthpt = :diemthpt"),
-    @NamedQuery(name = "Benmarks.findByDiemdgnl", query = "SELECT b FROM Benmarks b WHERE b.diemdgnl = :diemdgnl"),
-    @NamedQuery(name = "Benmarks.findByFacultyidFaculty", query = "SELECT b FROM Benmarks b WHERE b.facultyidFaculty = :facultyidFaculty")})
+    @NamedQuery(name = "Benmarks.findByDiemdgnl", query = "SELECT b FROM Benmarks b WHERE b.diemdgnl = :diemdgnl")})
 public class Benmarks implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,23 +53,14 @@ public class Benmarks implements Serializable {
     private Double diemthpt;
     @Column(name = "diemdgnl")
     private Double diemdgnl;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "faculty_idFaculty")
-    private int facultyidFaculty;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "benmarksIdbenmarks")
-    private Collection<Faculty> facultyCollection;
+    private Set<Faculty> facultySet;
 
     public Benmarks() {
     }
 
     public Benmarks(Integer idbenmarks) {
         this.idbenmarks = idbenmarks;
-    }
-
-    public Benmarks(Integer idbenmarks, int facultyidFaculty) {
-        this.idbenmarks = idbenmarks;
-        this.facultyidFaculty = facultyidFaculty;
     }
 
     public Integer getIdbenmarks() {
@@ -114,21 +103,13 @@ public class Benmarks implements Serializable {
         this.diemdgnl = diemdgnl;
     }
 
-    public int getFacultyidFaculty() {
-        return facultyidFaculty;
-    }
-
-    public void setFacultyidFaculty(int facultyidFaculty) {
-        this.facultyidFaculty = facultyidFaculty;
-    }
-
     @XmlTransient
-    public Collection<Faculty> getFacultyCollection() {
-        return facultyCollection;
+    public Set<Faculty> getFacultySet() {
+        return facultySet;
     }
 
-    public void setFacultyCollection(Collection<Faculty> facultyCollection) {
-        this.facultyCollection = facultyCollection;
+    public void setFacultySet(Set<Faculty> facultySet) {
+        this.facultySet = facultySet;
     }
 
     @Override

@@ -5,7 +5,7 @@
 package com.tqh.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -50,16 +50,14 @@ public class Faculty implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "facultyname")
     private String facultyname;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "website")
     private String website;
     @Size(max = 45)
     @Column(name = "introvideo")
     private String introvideo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "facultyIdfaculty")
-    private Collection<Post> postCollection;
+    private Set<Post> postSet;
     @JoinColumn(name = "benmarks_idbenmarks", referencedColumnName = "idbenmarks")
     @ManyToOne(optional = false)
     private Benmarks benmarksIdbenmarks;
@@ -71,10 +69,9 @@ public class Faculty implements Serializable {
         this.idfaculty = idfaculty;
     }
 
-    public Faculty(Integer idfaculty, String facultyname, String website) {
+    public Faculty(Integer idfaculty, String facultyname) {
         this.idfaculty = idfaculty;
         this.facultyname = facultyname;
-        this.website = website;
     }
 
     public Integer getIdfaculty() {
@@ -110,12 +107,12 @@ public class Faculty implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Post> getPostCollection() {
-        return postCollection;
+    public Set<Post> getPostSet() {
+        return postSet;
     }
 
-    public void setPostCollection(Collection<Post> postCollection) {
-        this.postCollection = postCollection;
+    public void setPostSet(Set<Post> postSet) {
+        this.postSet = postSet;
     }
 
     public Benmarks getBenmarksIdbenmarks() {
