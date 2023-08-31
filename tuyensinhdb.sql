@@ -253,18 +253,16 @@ CREATE TABLE `users` (
   `username` varchar(45) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(45) DEFAULT NULL,
-  `user_role` varchar(45) NOT NULL,
-  `school_idschool` int NOT NULL,
-  `userrole_iduserrole` int NOT NULL,
-  `banner_idbanner` int NOT NULL,
+  `user_role` varchar(45) DEFAULT NULL,
+  `school_idschool` int DEFAULT NULL,
+  `userrole_iduserrole` int DEFAULT NULL,
+  `banner_idbanner` int DEFAULT NULL,
   PRIMARY KEY (`idusers`),
   KEY `fk_users_school1_idx` (`school_idschool`),
   KEY `fk_users_userrole1_idx` (`userrole_iduserrole`),
   KEY `fk_users_banner1_idx` (`banner_idbanner`),
-  CONSTRAINT `fk_users_banner1` FOREIGN KEY (`banner_idbanner`) REFERENCES `banner` (`idbanner`),
-  CONSTRAINT `fk_users_school1` FOREIGN KEY (`school_idschool`) REFERENCES `school` (`idschool`),
-  CONSTRAINT `fk_users_userrole1` FOREIGN KEY (`userrole_iduserrole`) REFERENCES `userrole` (`iduserrole`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_users_school1` FOREIGN KEY (`school_idschool`) REFERENCES `school` (`idschool`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -273,7 +271,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Huy','Tran','https://res.cloudinary.com/duvo8z7fa/image/upload/v1690006526/tg5yok1dfow8ndhfwgyw.jpg','huy0204','$2a$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','sdgfas@gmail.com','ROLE_ADMIN',1,1,1),(2,'Danh','Nguyen',NULL,'danhcao198','$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','delco@gmail.com','ROLE_USER',1,2,1);
+INSERT INTO `users` VALUES (1,'Huy','Tran','https://res.cloudinary.com/duvo8z7fa/image/upload/v1690006526/tg5yok1dfow8ndhfwgyw.jpg','huy0204','$2a$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','sdgfas@gmail.com','ROLE_ADMIN',1,1,1),(2,'Danh','Nguyen',NULL,'danhcao198','$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','delco@gmail.com','ROLE_USER',1,2,1),(3,'Tran','Huy','https://res.cloudinary.com/dev7q6f9g/image/upload/v1693488714/lqokkejoiodxhqi5ep9y.jpg','huydeptrai','$2a$10$/.FCTYFCHFf8KTfTvujsQ.y7QReitn2OG1JRMmRJca8HIaTJUjaOG',NULL,NULL,NULL,NULL,NULL),(4,'Tran','Quang Huy','','hide112','$2a$10$ylHFAHWIF8sNbVQ/EexEZeNnMeTVHLnEr/lDi7x2OheK.1dQUftMa',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -286,4 +284,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-31 17:44:45
+-- Dump completed on 2023-08-31 21:03:54

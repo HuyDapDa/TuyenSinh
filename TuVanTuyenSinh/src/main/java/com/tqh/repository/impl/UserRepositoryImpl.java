@@ -4,8 +4,10 @@
  */
 package com.tqh.repository.impl;
 
+import com.tqh.controllers.IndexController;
 import com.tqh.pojo.Users;
 import com.tqh.repository.UserRepository;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,4 +58,40 @@ public class UserRepositoryImpl implements UserRepository {
         return u;
     }
 
+    @Override
+    public boolean addOrUpdateUser(Users user) {
+        Session s = this.factory.getObject().getCurrentSession();
+        try {
+            if (user.getIdusers() == null) {
+                if (checkLoginUser(user.getUsername())) {
+                    return false;
+                } else {
+                    user.setPassword(this.passEncoder.encode(user.getPassword()));
+                    s.save(user);
+
+                }
+            } else {
+                user.setPassword(this.passEncoder.encode(user.getPassword()));
+                s.update(user);
+            }
+
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean checkLoginUser(String username) {
+        Session s = this.factory.getObject().getCurrentSession();
+        javax.persistence.Query q = s.createQuery("SELECT Count(*) FROM Users WHERE username=:un");
+        q.setParameter("un", username);
+
+        if (Integer.parseInt(q.getSingleResult().toString()) >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

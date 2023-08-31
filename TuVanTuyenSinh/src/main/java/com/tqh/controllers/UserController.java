@@ -6,12 +6,15 @@ package com.tqh.controllers;
 
 import com.tqh.pojo.Users;
 import com.tqh.service.UserService;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -45,13 +48,18 @@ public class UserController {
     }
     
     @GetMapping("/register")
-    public String register(){
+    public String register(Model model){
+        model.addAttribute("user", new Users());
         return "register";
     }
     @PostMapping("/register")
-    public String processRegistrationForm(Users u, Model model) {        
-        model.addAttribute("successMessage", "Đăng ký thành công!");
-        return "register-success"; // Trang hiển thị thông báo đăng ký thành công
+    public String processRegistrationForm(@ModelAttribute(value = "user")@Valid Users u,BindingResult rs ) {
+        if (!rs.hasErrors()) {
+            if (userService.addOrUpdateUser(u) == true) {
+                return "redirect:/login";
+            } 
+        }
+        return "register"; // Trang hiển thị thông báo đăng ký thành công
     }
     
 }

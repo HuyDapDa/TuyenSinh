@@ -4,38 +4,44 @@
     Author     : Admin
 --%>
 
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+
+<h1 class="text-center text-info mt-1">Đăng ký</h1>
 <c:url value="/register" var="action" />
-<form method="post" action="${action}" enctype="multipart/form-data">
+<form:form method="post" action="${action}" modelAttribute="user" enctype="multipart/form-data">
+    <form:errors path="*" element="div" cssClass="alert alert-danger" />
+    <form:hidden path="avatar" />
+    <form:hidden path="idusers" />
     <div class="form-floating mb-3 mt-3">
-        <input type="text" class="form-control" id="username" placeholder="Nhập username..." name="username">
+        <form:input type="text" class="form-control" 
+                    path="username" id="username" placeholder="Nhập username..." name="username"/>
         <label for="username">Tên đăng nhập</label>
     </div>
-
     <div class="form-floating mt-3 mb-3">
-        <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu..." name="password">
+        <form:input type="password" class="form-control" 
+                    path="password" id="pwd" placeholder="Nhập mật khẩu..." name="password"/>
         <label for="pwd">Mật khẩu</label>
     </div>
-
     <div class="form-floating mb-3 mt-3">
-        <input type="text" class="form-control" id="firstname" placeholder="Nhập firstname..." name="firstName">
+        <form:input type="text" class="form-control"
+                    path="firstName" id="firstname" placeholder="Nhập firstname..." name="firstname"/>
         <label for="firstname">Họ</label>
     </div>
-
     <div class="form-floating mt-3 mb-3">
-        <input type="text" class="form-control" id="lastname" placeholder="Nhập lastname..." name="lastName">
+        <form:input type="text" class="form-control"
+                    path="lastName" id="lastname" placeholder="Nhập lastname..." name="lastname"/>
         <label for="lastname">Tên</label>
     </div>
-
     <div class="form-floating mt-3 mb-3">
-        <input type="file" class="form-control" id="avatar" name="avatar">
+        <form:input type="file" class="form-control"
+                    path="file" id="avatar" name="avatar"/>
         <label for="avatar">Chọn avatar</label>
     </div>
-
     <div class="form-floating mt-3 mb-3">
         <input type="submit" value="Đăng ký" class="btn btn-danger" />
     </div>
-</form>
+</form:form>

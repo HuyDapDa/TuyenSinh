@@ -27,5 +27,15 @@
         <put-attribute name ="title" value="Đăng ký"/>
         <put-attribute name ="content"
                        value="/WEB-INF/pages/register.jsp"/>
-    </definition>    
+    </definition>
+    <definition name="posts" extends="baseLayout">
+        <put-attribute name="title" value="Quản lý bài viết" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/posts.jsp" />
+    </definition>
+    <definition name="banners" extends="baseLayout">
+    <put-attribute name="title" value="Quản lý hình ảnh" />
+    <put-attribute name="content"
+                       value="/WEB-INF/pages/banners.jsp" />
+    </definition> 
 </tiles-definitions>

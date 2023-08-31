@@ -19,10 +19,12 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -73,7 +75,6 @@ public class Users implements Serializable {
     @Column(name = "email")
     private String email;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "user_role")
     private String userRole;
@@ -88,6 +89,20 @@ public class Users implements Serializable {
     @JoinColumn(name = "userrole_iduserrole", referencedColumnName = "iduserrole")
     @ManyToOne(optional = false)
     private Userrole userroleIduserrole;
+
+    @Transient
+    private MultipartFile file;
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
 
     public Users() {
     }
@@ -224,5 +239,5 @@ public class Users implements Serializable {
     public String toString() {
         return "com.tqh.pojo.Users[ idusers=" + idusers + " ]";
     }
-    
+
 }
