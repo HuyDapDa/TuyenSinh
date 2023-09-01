@@ -59,7 +59,7 @@ public class UserController {
                 return "redirect:/login";
             } 
         }
-        return "register"; // Trang hiển thị thông báo đăng ký thành công
+        return "register";
     }
     
 }

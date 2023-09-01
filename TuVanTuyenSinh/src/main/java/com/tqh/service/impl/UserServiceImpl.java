@@ -7,6 +7,7 @@ package com.tqh.service.impl;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.tqh.pojo.Users;
+import com.tqh.repository.RoleUserRepository;
 import com.tqh.repository.UserRepository;
 import com.tqh.service.UserService;
 import java.io.IOException;
@@ -37,6 +38,8 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder passwordEncoder;
     @Autowired
     private Cloudinary cloudinary;
+    @Autowired
+    private RoleUserRepository roleRepo;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -45,7 +48,7 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException("Invalid");
         }
         Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(u.getUserRole()));
+        authorities.add(new SimpleGrantedAuthority(u.getRoleUserIdRoleuser().getName()));
         return new org.springframework.security.core.userdetails.User(
                 u.getUsername(), u.getPassword(), authorities);
     }
@@ -69,6 +72,7 @@ public class UserServiceImpl implements UserService {
         u.setUsername(params.get("username"));
         u.setPassword(this.passwordEncoder.encode(params.get("password")));
         u.setUserRole("ROLE_USER");
+        u.setRoleUserIdRoleuser(this.roleRepo.getRoleUserById(2));
         if (!avatar.isEmpty()) {
             try {
                 Map res = this.cloudinary.uploader().upload(avatar.getBytes(),
@@ -85,7 +89,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean addOrUpdateUser(Users user) {
-          if (!user.getFile().isEmpty()) {
+        if (!user.getFile().isEmpty()) {
             try {
                 Map res = this.cloudinary.uploader().upload(user.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
                 user.setAvatar(res.get("secure_url").toString());
@@ -94,7 +98,7 @@ public class UserServiceImpl implements UserService {
             }
         }
 
-        return this.userRepo.addOrUpdateUser(user);    
+        return this.userRepo.addOrUpdateUser(user);
     }
 
 }

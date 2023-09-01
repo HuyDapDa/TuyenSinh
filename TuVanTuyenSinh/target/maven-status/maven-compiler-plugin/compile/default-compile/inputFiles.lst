@@ -1,11 +1,11 @@
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\repository\impl\AdmissionRepositoryImpl.java
+E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\service\RoleUserService.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\configs\HibernateConfig.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\repository\BannerRepository.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\service\PostService.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\repository\impl\BannerRepositoryImpl.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\controllers\IndexController.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\pojo\Post.java
-E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\pojo\Userrole.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\pojo\School.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\repository\AdmissionRepository.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\configs\TilesConfigs.java
@@ -15,12 +15,15 @@ E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\configs\SecurityWeb
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\controllers\PostController.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\configs\DispatcherServletInit.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\pojo\Banner.java
+E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\pojo\RoleUser.java
+E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\repository\RoleUserRepository.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\repository\UserRepository.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\service\AdmissionService.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\configs\WebAppContextConfig.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\service\impl\AdmissionServiceImpl.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\configs\SpringSecurityConfig.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\service\impl\UserServiceImpl.java
+E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\service\impl\RoleUserServiceImpl.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\pojo\Admission.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\repository\impl\UserRepositoryImpl.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\pojo\Benmarks.java
@@ -29,6 +32,7 @@ E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\service\impl\PostSe
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\service\UserService.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\pojo\Faculty.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\pojo\Comment.java
+E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\repository\impl\RoleUserRepositoryImpl.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\repository\PostRepository.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\pojo\Users.java
 E:\NGO\LTJAVA\TuyenSinh\TuVanTuyenSinh\src\main\java\com\tqh\service\BannerService.java

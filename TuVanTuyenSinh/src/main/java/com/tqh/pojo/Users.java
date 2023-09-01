@@ -42,7 +42,9 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username"),
     @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
     @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email"),
-    @NamedQuery(name = "Users.findByUserRole", query = "SELECT u FROM Users u WHERE u.userRole = :userRole")})
+    @NamedQuery(name = "Users.findByUserRole", query = "SELECT u FROM Users u WHERE u.userRole = :userRole"),
+    @NamedQuery(name = "Users.findBySchoolIdschool", query = "SELECT u FROM Users u WHERE u.schoolIdschool = :schoolIdschool"),
+    @NamedQuery(name = "Users.findByBannerIdbanner", query = "SELECT u FROM Users u WHERE u.bannerIdbanner = :bannerIdbanner")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -74,36 +76,30 @@ public class Users implements Serializable {
     @Size(max = 45)
     @Column(name = "email")
     private String email;
-    @Basic(optional = false)
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "user_role")
     private String userRole;
+    @Column(name = "school_idschool")
+    private Integer schoolIdschool;
+    @Column(name = "banner_idbanner")
+    private Integer bannerIdbanner;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersIdusers")
     private Set<Post> postSet;
-    @JoinColumn(name = "banner_idbanner", referencedColumnName = "idbanner")
+    @JoinColumn(name = "role_user_id_roleuser", referencedColumnName = "id_roleuser")
     @ManyToOne(optional = false)
-    private Banner bannerIdbanner;
-    @JoinColumn(name = "school_idschool", referencedColumnName = "idschool")
-    @ManyToOne(optional = false)
-    private School schoolIdschool;
-    @JoinColumn(name = "userrole_iduserrole", referencedColumnName = "iduserrole")
-    @ManyToOne(optional = false)
-    private Userrole userroleIduserrole;
+    private RoleUser roleUserIdRoleuser;
 
     @Transient
     private MultipartFile file;
-
+    
     public MultipartFile getFile() {
         return file;
     }
 
-    /**
-     * @param file the file to set
-     */
     public void setFile(MultipartFile file) {
         this.file = file;
     }
-
+    
     public Users() {
     }
 
@@ -111,11 +107,10 @@ public class Users implements Serializable {
         this.idusers = idusers;
     }
 
-    public Users(Integer idusers, String username, String password, String userRole) {
+    public Users(Integer idusers, String username, String password) {
         this.idusers = idusers;
         this.username = username;
         this.password = password;
-        this.userRole = userRole;
     }
 
     public Integer getIdusers() {
@@ -182,6 +177,22 @@ public class Users implements Serializable {
         this.userRole = userRole;
     }
 
+    public Integer getSchoolIdschool() {
+        return schoolIdschool;
+    }
+
+    public void setSchoolIdschool(Integer schoolIdschool) {
+        this.schoolIdschool = schoolIdschool;
+    }
+
+    public Integer getBannerIdbanner() {
+        return bannerIdbanner;
+    }
+
+    public void setBannerIdbanner(Integer bannerIdbanner) {
+        this.bannerIdbanner = bannerIdbanner;
+    }
+
     @XmlTransient
     public Set<Post> getPostSet() {
         return postSet;
@@ -191,28 +202,12 @@ public class Users implements Serializable {
         this.postSet = postSet;
     }
 
-    public Banner getBannerIdbanner() {
-        return bannerIdbanner;
+    public RoleUser getRoleUserIdRoleuser() {
+        return roleUserIdRoleuser;
     }
 
-    public void setBannerIdbanner(Banner bannerIdbanner) {
-        this.bannerIdbanner = bannerIdbanner;
-    }
-
-    public School getSchoolIdschool() {
-        return schoolIdschool;
-    }
-
-    public void setSchoolIdschool(School schoolIdschool) {
-        this.schoolIdschool = schoolIdschool;
-    }
-
-    public Userrole getUserroleIduserrole() {
-        return userroleIduserrole;
-    }
-
-    public void setUserroleIduserrole(Userrole userroleIduserrole) {
-        this.userroleIduserrole = userroleIduserrole;
+    public void setRoleUserIdRoleuser(RoleUser roleUserIdRoleuser) {
+        this.roleUserIdRoleuser = roleUserIdRoleuser;
     }
 
     @Override
@@ -239,5 +234,5 @@ public class Users implements Serializable {
     public String toString() {
         return "com.tqh.pojo.Users[ idusers=" + idusers + " ]";
     }
-
+    
 }

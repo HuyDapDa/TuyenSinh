@@ -5,20 +5,16 @@
 package com.tqh.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -42,8 +38,6 @@ public class Banner implements Serializable {
     @Size(max = 225)
     @Column(name = "image")
     private String image;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bannerIdbanner")
-    private Set<Users> usersSet;
 
     public Banner() {
     }
@@ -66,15 +60,6 @@ public class Banner implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    @XmlTransient
-    public Set<Users> getUsersSet() {
-        return usersSet;
-    }
-
-    public void setUsersSet(Set<Users> usersSet) {
-        this.usersSet = usersSet;
     }
 
     @Override

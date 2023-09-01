@@ -6,6 +6,7 @@ package com.tqh.repository.impl;
 
 import com.tqh.controllers.IndexController;
 import com.tqh.pojo.Users;
+import com.tqh.repository.RoleUserRepository;
 import com.tqh.repository.UserRepository;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -33,6 +34,8 @@ public class UserRepositoryImpl implements UserRepository {
     private BCryptPasswordEncoder passEncoder;
     @Autowired
     private Environment env;
+    @Autowired
+    private RoleUserRepository roleRepo;
 
     @Override
     public Users getUserByUsername(String username) {
@@ -66,6 +69,7 @@ public class UserRepositoryImpl implements UserRepository {
                 if (checkLoginUser(user.getUsername())) {
                     return false;
                 } else {
+                    user.setRoleUserIdRoleuser(this.roleRepo.getRoleUserById(2));
                     user.setPassword(this.passEncoder.encode(user.getPassword()));
                     s.save(user);
 

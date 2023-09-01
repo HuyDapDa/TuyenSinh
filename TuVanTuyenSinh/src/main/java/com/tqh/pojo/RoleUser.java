@@ -10,13 +10,12 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -26,39 +25,46 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Admin
  */
 @Entity
-@Table(name = "userrole")
+@Table(name = "role_user")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Userrole.findAll", query = "SELECT u FROM Userrole u"),
-    @NamedQuery(name = "Userrole.findByIduserrole", query = "SELECT u FROM Userrole u WHERE u.iduserrole = :iduserrole"),
-    @NamedQuery(name = "Userrole.findByName", query = "SELECT u FROM Userrole u WHERE u.name = :name")})
-public class Userrole implements Serializable {
+    @NamedQuery(name = "RoleUser.findAll", query = "SELECT r FROM RoleUser r"),
+    @NamedQuery(name = "RoleUser.findByIdRoleuser", query = "SELECT r FROM RoleUser r WHERE r.idRoleuser = :idRoleuser"),
+    @NamedQuery(name = "RoleUser.findByName", query = "SELECT r FROM RoleUser r WHERE r.name = :name")})
+public class RoleUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "iduserrole")
-    private Integer iduserrole;
-    @Size(max = 45)
+    @NotNull
+    @Column(name = "id_roleuser")
+    private Integer idRoleuser;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userroleIduserrole")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleUserIdRoleuser")
     private Set<Users> usersSet;
 
-    public Userrole() {
+    public RoleUser() {
     }
 
-    public Userrole(Integer iduserrole) {
-        this.iduserrole = iduserrole;
+    public RoleUser(Integer idRoleuser) {
+        this.idRoleuser = idRoleuser;
     }
 
-    public Integer getIduserrole() {
-        return iduserrole;
+    public RoleUser(Integer idRoleuser, String name) {
+        this.idRoleuser = idRoleuser;
+        this.name = name;
     }
 
-    public void setIduserrole(Integer iduserrole) {
-        this.iduserrole = iduserrole;
+    public Integer getIdRoleuser() {
+        return idRoleuser;
+    }
+
+    public void setIdRoleuser(Integer idRoleuser) {
+        this.idRoleuser = idRoleuser;
     }
 
     public String getName() {
@@ -81,18 +87,18 @@ public class Userrole implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (iduserrole != null ? iduserrole.hashCode() : 0);
+        hash += (idRoleuser != null ? idRoleuser.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Userrole)) {
+        if (!(object instanceof RoleUser)) {
             return false;
         }
-        Userrole other = (Userrole) object;
-        if ((this.iduserrole == null && other.iduserrole != null) || (this.iduserrole != null && !this.iduserrole.equals(other.iduserrole))) {
+        RoleUser other = (RoleUser) object;
+        if ((this.idRoleuser == null && other.idRoleuser != null) || (this.idRoleuser != null && !this.idRoleuser.equals(other.idRoleuser))) {
             return false;
         }
         return true;
@@ -100,7 +106,7 @@ public class Userrole implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tqh.pojo.Userrole[ iduserrole=" + iduserrole + " ]";
+        return "com.tqh.pojo.RoleUser[ idRoleuser=" + idRoleuser + " ]";
     }
     
 }
