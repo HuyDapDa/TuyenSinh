@@ -5,9 +5,9 @@
 package com.tqh.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,21 +20,27 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
- * @author Admin
+ * @author HP
  */
 @Entity
 @Table(name = "post")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Post.findAll", query = "SELECT p FROM Post p"),
-    @NamedQuery(name = "Post.findByIdpost", query = "SELECT p FROM Post p WHERE p.idpost = :idpost")})
+    @NamedQuery(name = "Post.findByIdpost", query = "SELECT p FROM Post p WHERE p.idpost = :idpost"),
+    @NamedQuery(name = "Post.findByPostImg", query = "SELECT p FROM Post p WHERE p.postImg = :postImg"),
+    @NamedQuery(name = "Post.findByCreatedDate", query = "SELECT p FROM Post p WHERE p.createdDate = :createdDate")})
 public class Post implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,38 +50,48 @@ public class Post implements Serializable {
     @Column(name = "idpost")
     private Integer idpost;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{post.name.notNull}")
     @Lob
-    @Size(min = 1, max = 2147483647)
+    @Size(min = 1, max = 2147483647, message = "{post.name.lenErr}")
     @Column(name = "postName")
     private String postName;
     @Basic(optional = false)
     @NotNull
     @Lob
-    @Size(min = 1, max = 2147483647)
+    @Size(min = 1, max = 2147483647, message = "{post.desc.lenErr}")
     @Column(name = "postinformation")
     private String postinformation;
     @Lob
     @Size(max = 2147483647)
     @Column(name = "posttype")
     private String posttype;
+    @Size(max = 255)
+    @Column(name = "postImg")
+    private String postImg;
+    @Column(name = "createdDate")
+    @Temporal(TemporalType.DATE)
+    private Date createdDate;
     @JoinColumn(name = "admission_idadmission", referencedColumnName = "idadmission")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Admission admissionIdadmission;
     @JoinColumn(name = "faculty_idfaculty", referencedColumnName = "idfaculty")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Faculty facultyIdfaculty;
     @JoinColumn(name = "users_idusers", referencedColumnName = "idusers")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Users usersIdusers;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postAdmissionIdadmission")
+    @OneToMany(mappedBy = "postIdpost")
     private Set<Comment> commentSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postFacultyIdfaculty")
-    private Set<Comment> commentSet1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postIdpost")
-    private Set<Comment> commentSet2;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postUsersIdusers")
-    private Set<Comment> commentSet3;
+    @Transient
+    private MultipartFile file;
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
 
     public Post() {
     }
@@ -122,6 +138,22 @@ public class Post implements Serializable {
         this.posttype = posttype;
     }
 
+    public String getPostImg() {
+        return postImg;
+    }
+
+    public void setPostImg(String postImg) {
+        this.postImg = postImg;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
     public Admission getAdmissionIdadmission() {
         return admissionIdadmission;
     }
@@ -155,33 +187,6 @@ public class Post implements Serializable {
         this.commentSet = commentSet;
     }
 
-    @XmlTransient
-    public Set<Comment> getCommentSet1() {
-        return commentSet1;
-    }
-
-    public void setCommentSet1(Set<Comment> commentSet1) {
-        this.commentSet1 = commentSet1;
-    }
-
-    @XmlTransient
-    public Set<Comment> getCommentSet2() {
-        return commentSet2;
-    }
-
-    public void setCommentSet2(Set<Comment> commentSet2) {
-        this.commentSet2 = commentSet2;
-    }
-
-    @XmlTransient
-    public Set<Comment> getCommentSet3() {
-        return commentSet3;
-    }
-
-    public void setCommentSet3(Set<Comment> commentSet3) {
-        this.commentSet3 = commentSet3;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -206,5 +211,5 @@ public class Post implements Serializable {
     public String toString() {
         return "com.tqh.pojo.Post[ idpost=" + idpost + " ]";
     }
-    
+
 }

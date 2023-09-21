@@ -13,20 +13,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
- * @author Admin
+ * @author HP
  */
 @Entity
 @Table(name = "faculty")
@@ -36,7 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Faculty.findByIdfaculty", query = "SELECT f FROM Faculty f WHERE f.idfaculty = :idfaculty"),
     @NamedQuery(name = "Faculty.findByFacultyname", query = "SELECT f FROM Faculty f WHERE f.facultyname = :facultyname"),
     @NamedQuery(name = "Faculty.findByWebsite", query = "SELECT f FROM Faculty f WHERE f.website = :website"),
-    @NamedQuery(name = "Faculty.findByIntrovideo", query = "SELECT f FROM Faculty f WHERE f.introvideo = :introvideo")})
+    @NamedQuery(name = "Faculty.findByIntrovideo", query = "SELECT f FROM Faculty f WHERE f.introvideo = :introvideo"),
+    @NamedQuery(name = "Faculty.findByHocPhi", query = "SELECT f FROM Faculty f WHERE f.hocPhi = :hocPhi")})
 public class Faculty implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,11 +58,30 @@ public class Faculty implements Serializable {
     @Size(max = 45)
     @Column(name = "introvideo")
     private String introvideo;
+    @Lob
+    @Size(max = 2147483647)
+    @Column(name = "gioiThieu")
+    private String gioiThieu;
+    @Lob
+    @Size(max = 2147483647)
+    @Column(name = "moTaCTDT")
+    private String moTaCTDT;
+    @Column(name = "hocPhi")
+    private Integer hocPhi;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "facultyIdfaculty")
+    private Set<Majors> majorsSet;
+    @OneToMany(mappedBy = "facultyIdfaculty")
     private Set<Post> postSet;
-    @JoinColumn(name = "benmarks_idbenmarks", referencedColumnName = "idbenmarks")
-    @ManyToOne(optional = false)
-    private Benmarks benmarksIdbenmarks;
+    @Transient
+    private MultipartFile file;
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
 
     public Faculty() {
     }
@@ -106,6 +127,39 @@ public class Faculty implements Serializable {
         this.introvideo = introvideo;
     }
 
+    public String getGioiThieu() {
+        return gioiThieu;
+    }
+
+    public void setGioiThieu(String gioiThieu) {
+        this.gioiThieu = gioiThieu;
+    }
+
+    public String getMoTaCTDT() {
+        return moTaCTDT;
+    }
+
+    public void setMoTaCTDT(String moTaCTDT) {
+        this.moTaCTDT = moTaCTDT;
+    }
+
+    public Integer getHocPhi() {
+        return hocPhi;
+    }
+
+    public void setHocPhi(Integer hocPhi) {
+        this.hocPhi = hocPhi;
+    }
+
+    @XmlTransient
+    public Set<Majors> getMajorsSet() {
+        return majorsSet;
+    }
+
+    public void setMajorsSet(Set<Majors> majorsSet) {
+        this.majorsSet = majorsSet;
+    }
+
     @XmlTransient
     public Set<Post> getPostSet() {
         return postSet;
@@ -113,14 +167,6 @@ public class Faculty implements Serializable {
 
     public void setPostSet(Set<Post> postSet) {
         this.postSet = postSet;
-    }
-
-    public Benmarks getBenmarksIdbenmarks() {
-        return benmarksIdbenmarks;
-    }
-
-    public void setBenmarksIdbenmarks(Benmarks benmarksIdbenmarks) {
-        this.benmarksIdbenmarks = benmarksIdbenmarks;
     }
 
     @Override
@@ -147,5 +193,5 @@ public class Faculty implements Serializable {
     public String toString() {
         return "com.tqh.pojo.Faculty[ idfaculty=" + idfaculty + " ]";
     }
-    
+
 }

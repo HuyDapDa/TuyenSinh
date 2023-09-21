@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -28,7 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
- * @author Admin
+ * @author HP
  */
 @Entity
 @Table(name = "users")
@@ -41,10 +42,7 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "Users.findByAvatar", query = "SELECT u FROM Users u WHERE u.avatar = :avatar"),
     @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username"),
     @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
-    @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email"),
-    @NamedQuery(name = "Users.findByUserRole", query = "SELECT u FROM Users u WHERE u.userRole = :userRole"),
-    @NamedQuery(name = "Users.findBySchoolIdschool", query = "SELECT u FROM Users u WHERE u.schoolIdschool = :schoolIdschool"),
-    @NamedQuery(name = "Users.findByBannerIdbanner", query = "SELECT u FROM Users u WHERE u.bannerIdbanner = :bannerIdbanner")})
+    @NamedQuery(name = "Users.findByActive", query = "SELECT u FROM Users u WHERE u.active = :active")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,35 +61,38 @@ public class Users implements Serializable {
     @Column(name = "avatar")
     private String avatar;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{users.username.notNull}")
     @Size(min = 1, max = 45)
     @Column(name = "username")
     private String username;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{users.password.notNull}")
     @Size(min = 1, max = 255)
     @Column(name = "password")
     private String password;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 45)
+    @Lob
+    @Size(max = 2147483647)
     @Column(name = "email")
     private String email;
-    @Size(max = 45)
-    @Column(name = "user_role")
-    private String userRole;
-    @Column(name = "school_idschool")
-    private Integer schoolIdschool;
-    @Column(name = "banner_idbanner")
-    private Integer bannerIdbanner;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersIdusers")
+    @Column(name = "active")
+    private Boolean active;
+    @OneToMany(mappedBy = "usersIdusers")
     private Set<Post> postSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersIdusers")
+    private Set<School> schoolSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersIdusers")
+    private Set<Livestreams> livestreamsSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersIdusers")
+    private Set<Banner> bannerSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersIdusers")
+    private Set<Comment> commentSet;
     @JoinColumn(name = "role_user_id_roleuser", referencedColumnName = "id_roleuser")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private RoleUser roleUserIdRoleuser;
-
     @Transient
     private MultipartFile file;
-    
+
     public MultipartFile getFile() {
         return file;
     }
@@ -99,7 +100,7 @@ public class Users implements Serializable {
     public void setFile(MultipartFile file) {
         this.file = file;
     }
-    
+
     public Users() {
     }
 
@@ -169,28 +170,12 @@ public class Users implements Serializable {
         this.email = email;
     }
 
-    public String getUserRole() {
-        return userRole;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
-    }
-
-    public Integer getSchoolIdschool() {
-        return schoolIdschool;
-    }
-
-    public void setSchoolIdschool(Integer schoolIdschool) {
-        this.schoolIdschool = schoolIdschool;
-    }
-
-    public Integer getBannerIdbanner() {
-        return bannerIdbanner;
-    }
-
-    public void setBannerIdbanner(Integer bannerIdbanner) {
-        this.bannerIdbanner = bannerIdbanner;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     @XmlTransient
@@ -200,6 +185,42 @@ public class Users implements Serializable {
 
     public void setPostSet(Set<Post> postSet) {
         this.postSet = postSet;
+    }
+
+    @XmlTransient
+    public Set<School> getSchoolSet() {
+        return schoolSet;
+    }
+
+    public void setSchoolSet(Set<School> schoolSet) {
+        this.schoolSet = schoolSet;
+    }
+
+    @XmlTransient
+    public Set<Livestreams> getLivestreamsSet() {
+        return livestreamsSet;
+    }
+
+    public void setLivestreamsSet(Set<Livestreams> livestreamsSet) {
+        this.livestreamsSet = livestreamsSet;
+    }
+
+    @XmlTransient
+    public Set<Banner> getBannerSet() {
+        return bannerSet;
+    }
+
+    public void setBannerSet(Set<Banner> bannerSet) {
+        this.bannerSet = bannerSet;
+    }
+
+    @XmlTransient
+    public Set<Comment> getCommentSet() {
+        return commentSet;
+    }
+
+    public void setCommentSet(Set<Comment> commentSet) {
+        this.commentSet = commentSet;
     }
 
     public RoleUser getRoleUserIdRoleuser() {
@@ -234,5 +255,5 @@ public class Users implements Serializable {
     public String toString() {
         return "com.tqh.pojo.Users[ idusers=" + idusers + " ]";
     }
-    
+
 }

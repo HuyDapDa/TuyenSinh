@@ -5,25 +5,23 @@
 package com.tqh.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Admin
+ * @author HP
  */
 @Entity
 @Table(name = "benmarks")
@@ -53,8 +51,9 @@ public class Benmarks implements Serializable {
     private Double diemthpt;
     @Column(name = "diemdgnl")
     private Double diemdgnl;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "benmarksIdbenmarks")
-    private Set<Faculty> facultySet;
+    @JoinColumn(name = "majors_idmajors", referencedColumnName = "idmajors")
+    @ManyToOne(optional = false)
+    private Majors majorsIdmajors;
 
     public Benmarks() {
     }
@@ -103,13 +102,12 @@ public class Benmarks implements Serializable {
         this.diemdgnl = diemdgnl;
     }
 
-    @XmlTransient
-    public Set<Faculty> getFacultySet() {
-        return facultySet;
+    public Majors getMajorsIdmajors() {
+        return majorsIdmajors;
     }
 
-    public void setFacultySet(Set<Faculty> facultySet) {
-        this.facultySet = facultySet;
+    public void setMajorsIdmajors(Majors majorsIdmajors) {
+        this.majorsIdmajors = majorsIdmajors;
     }
 
     @Override

@@ -5,6 +5,8 @@
 package com.tqh.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,13 +17,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Admin
+ * @author HP
  */
 @Entity
 @Table(name = "comment")
@@ -29,7 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c"),
     @NamedQuery(name = "Comment.findByIdcomment", query = "SELECT c FROM Comment c WHERE c.idcomment = :idcomment"),
-    @NamedQuery(name = "Comment.findByCommentinformation", query = "SELECT c FROM Comment c WHERE c.commentinformation = :commentinformation")})
+    @NamedQuery(name = "Comment.findByCommentinformation", query = "SELECT c FROM Comment c WHERE c.commentinformation = :commentinformation"),
+    @NamedQuery(name = "Comment.findByCreatedDate", query = "SELECT c FROM Comment c WHERE c.createdDate = :createdDate")})
 public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,21 +45,26 @@ public class Comment implements Serializable {
     @Basic(optional = false)
     @Column(name = "idcomment")
     private Integer idcomment;
-    @Size(max = 45)
+    @Size(max = 255)
     @Column(name = "commentinformation")
     private String commentinformation;
-    @JoinColumn(name = "post_admission_idadmission", referencedColumnName = "admission_idadmission")
-    @ManyToOne(optional = false)
-    private Post postAdmissionIdadmission;
-    @JoinColumn(name = "post_faculty_idfaculty", referencedColumnName = "faculty_idfaculty")
-    @ManyToOne(optional = false)
-    private Post postFacultyIdfaculty;
+    @Column(name = "created_date")
+    @Temporal(TemporalType.DATE)
+    private Date createdDate;
+    @OneToMany(mappedBy = "commentIdcomment")
+    private Set<Comment> commentSet;
+    @JoinColumn(name = "comment_idcomment", referencedColumnName = "idcomment")
+    @ManyToOne
+    private Comment commentIdcomment;
+    @JoinColumn(name = "livestreams_idlivestreams", referencedColumnName = "idlivestreams")
+    @ManyToOne
+    private Livestreams livestreamsIdlivestreams;
     @JoinColumn(name = "post_idpost", referencedColumnName = "idpost")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Post postIdpost;
-    @JoinColumn(name = "post_users_idusers", referencedColumnName = "users_idusers")
+    @JoinColumn(name = "users_idusers", referencedColumnName = "idusers")
     @ManyToOne(optional = false)
-    private Post postUsersIdusers;
+    private Users usersIdusers;
 
     public Comment() {
     }
@@ -77,20 +89,37 @@ public class Comment implements Serializable {
         this.commentinformation = commentinformation;
     }
 
-    public Post getPostAdmissionIdadmission() {
-        return postAdmissionIdadmission;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setPostAdmissionIdadmission(Post postAdmissionIdadmission) {
-        this.postAdmissionIdadmission = postAdmissionIdadmission;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public Post getPostFacultyIdfaculty() {
-        return postFacultyIdfaculty;
+    @XmlTransient
+    public Set<Comment> getCommentSet() {
+        return commentSet;
     }
 
-    public void setPostFacultyIdfaculty(Post postFacultyIdfaculty) {
-        this.postFacultyIdfaculty = postFacultyIdfaculty;
+    public void setCommentSet(Set<Comment> commentSet) {
+        this.commentSet = commentSet;
+    }
+
+    public Comment getCommentIdcomment() {
+        return commentIdcomment;
+    }
+
+    public void setCommentIdcomment(Comment commentIdcomment) {
+        this.commentIdcomment = commentIdcomment;
+    }
+
+    public Livestreams getLivestreamsIdlivestreams() {
+        return livestreamsIdlivestreams;
+    }
+
+    public void setLivestreamsIdlivestreams(Livestreams livestreamsIdlivestreams) {
+        this.livestreamsIdlivestreams = livestreamsIdlivestreams;
     }
 
     public Post getPostIdpost() {
@@ -101,12 +130,12 @@ public class Comment implements Serializable {
         this.postIdpost = postIdpost;
     }
 
-    public Post getPostUsersIdusers() {
-        return postUsersIdusers;
+    public Users getUsersIdusers() {
+        return usersIdusers;
     }
 
-    public void setPostUsersIdusers(Post postUsersIdusers) {
-        this.postUsersIdusers = postUsersIdusers;
+    public void setUsersIdusers(Users usersIdusers) {
+        this.usersIdusers = usersIdusers;
     }
 
     @Override

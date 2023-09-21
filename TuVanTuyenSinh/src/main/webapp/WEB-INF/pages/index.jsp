@@ -8,60 +8,57 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
-<div class="banner">
-    <img src="path_to_your_banner_image.jpg" alt="Banner Image" class="img-fluid">
-</div>
-
-
-<div class="intro-section">
-    <div class="container">
-        <div class="intro-text">
-            <h2>Trường Đại học Mở Thành phố Hồ Chí Minh</h2>
-            <p>
-                Trường Đại học Mở Thành phố Hồ Chí Minh, ban đầu được thành lập với cái tên "Viện Đào tạo Mở Rộng". Vào ngày 15 tháng 6 năm 1990, trường đã trở thành một phần của hệ thống cán bộ quản lý, đại học trung học chuyên nghiệp và dạy nghề. Sau đó, vào năm 1993, trường đã được nâng cấp thành Đại học Mở, phục vụ đào tạo từ xa và phát triển dân tộc khu vực.
-            </p>
-            <p>
-                Với cam kết về chất lượng đào tạo và mục tiêu trở thành một trong những trường đại học hàng đầu ở Việt Nam, chúng tôi không ngừng phấn đấu để phát triển kiến thức và hỗ trợ cộng đồng. Trong hành trình của chúng tôi, hoạt động đào tạo từ xa và phát triển bền vững luôn là ưu tiên hàng đầu.
-            </p>
-            <p>
-                Năm 2006, trường Đại học Mở Thành phố Hồ Chí Minh đã thành công trong việc tự chủ về tài chính, đánh dấu bước ngoặt quan trọng trong sự phát triển của chúng tôi. Với mục tiêu và định hướng phát triển rõ ràng, chúng tôi tự tin vào tương lai sáng lạng của trường.
-            </p>
-        </div>
-    </div>
-</div>
-
-
-<section class="container my-5">
+<div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <div class="he-info">
-                <h3>Hệ Chính Quy</h3>
-                <!-- Thêm thông tin về hệ chính quy tại đây -->
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="he-info">
-                <h3>Hệ Đào Tạo Từ Xa</h3>
-                <!-- Thêm thông tin về hệ đào tạo từ xa tại đây -->
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="he-info">
-                <h3>Văn Bằng 2</h3>
-                <!-- Thêm thông tin về văn bằng 2 tại đây -->
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="he-info">
-                <h3>Liên Thông</h3>
-                <!-- Thêm thông tin về liên thông tại đây -->
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="he-info">
-                <h3>Cao Học</h3>
-                <!-- Thêm thông tin về cao học tại đây -->
+        <div class="col-md-12">
+            <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <c:forEach items="${banner}" var="dsb" varStatus="status">
+                        <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
+                            <img src="${dsb.image}" alt="Banner Image" width="1000px" height="500px" class="d-block w-100" >
+                        </div>
+                    </c:forEach>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         </div>
     </div>
-</section>
+</div>
+<a href="bannersetting.jsp"></a>
+
+
+<c:forEach items="${admission}" var="ds" >
+   
+    <div class="container my-5">
+        <a href="<c:url value='/postlist/${ds.idadmission}/'/>">
+            <h3 class="card-title text-dark fw-bold" id="${ds.idadmission}">${ds.typeoftraining}</h3>
+        </a>
+        <div class="row">
+            <c:set var="postCount" value="0" />
+            <c:forEach items="${posts}" var="dsp" varStatus="loopStatus">
+                <c:if test="${ds.typeoftraining eq dsp.admissionIdadmission.typeoftraining && postCount lt 5}">
+                    <div class="col-md-6">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="nav-link text-sm-left" style="text-decoration: none; color: black;">${dsp.posttype}</h5>
+                                <a class="nav-item" href="<c:url value='/postdetail/${dsp.idpost}'/>">
+                                    <h2 class="nav-link">${dsp.postName}</h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <c:set var="postCount" value="${postCount + 1}" />
+                </c:if>
+            </c:forEach>
+        </div>
+    </div>
+</c:forEach>
+<!-- Add JavaScript to handle banner navigation -->
+<script src="<c:url value="/assets/js/banner.js" />"></script>

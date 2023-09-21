@@ -7,7 +7,6 @@ package com.tqh.pojo;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -22,7 +21,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Admin
+ * @author HP
  */
 @Entity
 @Table(name = "role_user")
@@ -44,7 +43,7 @@ public class RoleUser implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleUserIdRoleuser")
+    @OneToMany(mappedBy = "roleUserIdRoleuser")
     private Set<Users> usersSet;
 
     public RoleUser() {

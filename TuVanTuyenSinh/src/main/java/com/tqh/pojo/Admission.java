@@ -7,9 +7,10 @@ package com.tqh.pojo;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -22,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Admin
+ * @author HP
  */
 @Entity
 @Table(name = "admission")
@@ -35,8 +36,8 @@ public class Admission implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idadmission")
     private Integer idadmission;
     @Basic(optional = false)
@@ -44,7 +45,7 @@ public class Admission implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "typeoftraining")
     private String typeoftraining;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "admissionIdadmission")
+    @OneToMany(mappedBy = "admissionIdadmission")
     private Set<Post> postSet;
 
     public Admission() {

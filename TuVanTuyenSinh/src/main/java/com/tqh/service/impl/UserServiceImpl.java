@@ -6,6 +6,7 @@ package com.tqh.service.impl;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.tqh.pojo.StaticClass;
 import com.tqh.pojo.Users;
 import com.tqh.repository.RoleUserRepository;
 import com.tqh.repository.UserRepository;
@@ -29,7 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
  *
  * @author Admin
  */
-@Service("userDetailsService")
+@Service("userDetailsService")  
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -44,6 +45,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Users u = this.userRepo.getUserByUsername(username);
+        StaticClass.users=u;
         if (u == null) {
             throw new UsernameNotFoundException("Invalid");
         }
@@ -71,7 +73,7 @@ public class UserServiceImpl implements UserService {
         u.setEmail(params.get("email"));
         u.setUsername(params.get("username"));
         u.setPassword(this.passwordEncoder.encode(params.get("password")));
-        u.setUserRole("ROLE_USER");
+        u.getActive();
         u.setRoleUserIdRoleuser(this.roleRepo.getRoleUserById(2));
         if (!avatar.isEmpty()) {
             try {

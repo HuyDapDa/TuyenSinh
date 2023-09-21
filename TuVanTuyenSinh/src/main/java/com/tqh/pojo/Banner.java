@@ -8,17 +8,22 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
- * @author Admin
+ * @author HP
  */
 @Entity
 @Table(name = "banner")
@@ -31,13 +36,26 @@ public class Banner implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idbanner")
     private Integer idbanner;
     @Size(max = 225)
     @Column(name = "image")
     private String image;
+    @JoinColumn(name = "users_idusers", referencedColumnName = "idusers")
+    @ManyToOne(optional = false)
+    private Users usersIdusers;
+    @Transient
+    private MultipartFile file;
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
 
     public Banner() {
     }
@@ -60,6 +78,14 @@ public class Banner implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Users getUsersIdusers() {
+        return usersIdusers;
+    }
+
+    public void setUsersIdusers(Users usersIdusers) {
+        this.usersIdusers = usersIdusers;
     }
 
     @Override
@@ -86,5 +112,5 @@ public class Banner implements Serializable {
     public String toString() {
         return "com.tqh.pojo.Banner[ idbanner=" + idbanner + " ]";
     }
-    
+
 }
