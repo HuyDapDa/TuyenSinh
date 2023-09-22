@@ -7,6 +7,7 @@ package com.tqh.controllers;
 import com.tqh.pojo.Users;
 import com.tqh.service.UserService;
 import javax.validation.Valid;
+import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -15,7 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
@@ -24,42 +27,42 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @PropertySource("classpath:configs.properties")
 public class UserController {
-    
+
     @Autowired
     private UserService userService;
     @Autowired
     private Environment env;
 
-//    @GetMapping("/users")
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/register")
+    public String register(Model model) {
+        model.addAttribute("user", new Users());
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String processRegistrationForm(@ModelAttribute(value = "user") @Valid Users u, BindingResult rs) {
+        if (!rs.hasErrors()) {
+            if (userService.addOrUpdateUser(u) == true) {
+                return "redirect:/login";
+            }
+        }
+        return "register";
+    }
+
+//    @GetMapping("/admin/users")
 //    public String list(Model model) {
 //        model.addAttribute("user", new Users());
 //        return "users";
 //    }
 //
-//    @GetMapping("/users/{username}")
-//    public String update(Model model, @PathVariable(value = "username") String username) {
-//        model.addAttribute("user", this.userService.getUserByUn(username));
+//    @GetMapping("/admin/users/{id}")
+//    public String update(Model model, @PathVariable(value = "id") int id) {
+//        model.addAttribute("user", this.userService. getUserByLogin(id));
 //        return "users";
 //    }
-
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-    
-    @GetMapping("/register")
-    public String register(Model model){
-        model.addAttribute("user", new Users());
-        return "register";
-    }
-    @PostMapping("/register")
-    public String processRegistrationForm(@ModelAttribute(value = "user")@Valid Users u,BindingResult rs ) {
-        if (!rs.hasErrors()) {
-            if (userService.addOrUpdateUser(u) == true) {
-                return "redirect:/login";
-            } 
-        }
-        return "register";
-    }
-    
 }

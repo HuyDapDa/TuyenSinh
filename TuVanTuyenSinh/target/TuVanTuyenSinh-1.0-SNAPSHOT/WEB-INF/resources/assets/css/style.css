@@ -10534,3 +10534,11 @@ h1, h2, h3, h4, h5,
     background: linear-gradient(to bottom right, rgba(79, 172, 254, 1), rgba(0,
         242, 254, 1))
 }
+.small-search-box {
+    width: 200px; /* Điều chỉnh kích thước theo ý muốn */
+    margin-bottom: 10px; /* Điều chỉnh khoảng cách giữa nút tìm kiếm và ô nhập liệu */
+}
+
+
+
+

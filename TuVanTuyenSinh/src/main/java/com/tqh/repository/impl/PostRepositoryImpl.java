@@ -7,11 +7,13 @@ package com.tqh.repository.impl;
 import com.tqh.pojo.Post;
 import com.tqh.pojo.StaticClass;
 import com.tqh.repository.PostRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -44,8 +46,18 @@ public class PostRepositoryImpl implements PostRepository {
         Root root = q.from(Post.class);
         q.select(root);
 
-        Query query = session.createQuery(q);
 
+//        if (params != null) {
+//            List<Predicate> predicates = new ArrayList<>();
+//            String kw = params.get("kw");
+//            if (kw != null && !kw.isEmpty()) {
+//                predicates.add(b.like(root.get("posttype"), String.format("%%%s%%", kw)));
+//            }
+//            q.where(predicates.toArray(Predicate[]::new));
+//        }
+//        q.orderBy(b.desc(root.get("idpost")));
+//        
+        Query query = session.createQuery(q);
         if (params != null) {
             String page = params.get("page");
             if (page != null && !page.isEmpty()) {

@@ -103,4 +103,14 @@
         <put-attribute name="content"
                        value="/WEB-INF/pages/questionlist.jsp" />
     </definition>
+    <definition name="userssettings" extends="baseLayout">
+        <put-attribute name="title" value="Quản lý Người Dùng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/userssettings.jsp" />
+    </definition>
+    <definition name="users" extends="baseLayout">
+        <put-attribute name="title" value="Quản lý Người Dùng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/users.jsp" />
+    </definition>
 </tiles-definitions>

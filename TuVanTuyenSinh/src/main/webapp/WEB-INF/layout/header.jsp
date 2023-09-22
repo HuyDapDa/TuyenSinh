@@ -67,18 +67,20 @@
             <ul class="navbar-nav ml-auto">
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
-                        <li class="nav-item">
+                        <li class="nav-item dropdown">
                             <c:if test="${user.roleUserIdRoleuser.name == 'ROLE_ADMIN'}">
-                            <li class="nav-item">
-                                <a class="nav-link" href="<c:url value='/admin/facultysetting/' />">Quản lý khoa</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<c:url value='/admin/settings/' />">Quản lý</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<c:url value='/admin/bannersetting/' />">Banners</a>
-                            </li>
-                        </c:if>
+                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Quản lý
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="adminDropdown">
+                                    <a class="dropdown-item" href="<c:url value='/admin/facultysetting/' />">Quản lý khoa</a>
+                                    <a class="dropdown-item" href="<c:url value='/admin/settings/' />">Quản lý bài viết</a>
+                                    <a class="dropdown-item" href="<c:url value='/admin/bannersetting/' />">Quản lý Banners</a>
+                                    <a class="dropdown-item" href="<c:url value='/admin/userssetting/' />">Quản lý người dùng</a>
+                                </div>
+                            </c:if>
+                        </li>
+                        </li>   
                         <li class="nav-item">
                             <a class="nav-link" href="<c:url value='/' />">
                                 <c:if test="${user!=null}">
