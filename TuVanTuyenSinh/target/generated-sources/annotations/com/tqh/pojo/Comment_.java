@@ -10,7 +10,7 @@ import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.9.v20210604-rNA", date="2023-09-22T18:34:39")
+@Generated(value="EclipseLink-2.7.9.v20210604-rNA", date="2023-10-14T17:08:38")
 @StaticMetamodel(Comment.class)
 public class Comment_ { 
 
@@ -21,6 +21,7 @@ public class Comment_ {
     public static volatile SetAttribute<Comment, Comment> commentSet;
     public static volatile SingularAttribute<Comment, Post> postIdpost;
     public static volatile SingularAttribute<Comment, Integer> idcomment;
+    public static volatile SingularAttribute<Comment, Comment> commentidcommentReply;
     public static volatile SingularAttribute<Comment, Users> usersIdusers;
 
 }

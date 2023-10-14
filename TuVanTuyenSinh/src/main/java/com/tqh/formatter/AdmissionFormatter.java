@@ -22,7 +22,7 @@ public class AdmissionFormatter implements Formatter<Admission>{
 
     @Override
     public Admission parse(String text, Locale locale) throws ParseException {
-         int id = Integer.parseInt(text);
+        int id = Integer.parseInt(text);
         return new Admission(id);
     }
     

@@ -4,6 +4,7 @@
  */
 package com.tqh.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -55,7 +56,8 @@ public class Faculty implements Serializable {
     @Size(max = 45)
     @Column(name = "website")
     private String website;
-    @Size(max = 45)
+    @Lob
+    @Size(max = 2147483647)
     @Column(name = "introvideo")
     private String introvideo;
     @Lob
@@ -69,8 +71,10 @@ public class Faculty implements Serializable {
     @Column(name = "hocPhi")
     private Integer hocPhi;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "facultyIdfaculty")
+    @JsonIgnore
     private Set<Majors> majorsSet;
     @OneToMany(mappedBy = "facultyIdfaculty")
+    @JsonIgnore
     private Set<Post> postSet;
     @Transient
     private MultipartFile file;

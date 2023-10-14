@@ -7,9 +7,14 @@ package com.tqh.controllers;
 import com.tqh.pojo.StaticClass;
 import com.tqh.service.AdmissionService;
 import com.tqh.service.BannerService;
+import com.tqh.service.BenmarkService;
 import com.tqh.service.FacultyService;
+import com.tqh.service.LivestreamService;
+import com.tqh.service.MajorService;
 import com.tqh.service.PostService;
+import com.tqh.service.RoleUserService;
 import com.tqh.service.UserService;
+import java.security.Principal;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
@@ -43,18 +48,28 @@ public class IndexController {
     private BannerService bannerService;
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private MajorService majorService;
+    @Autowired
+    private BenmarkService benmarkService;
+    @Autowired
+    private LivestreamService livestreamService;
+    @Autowired
+    private RoleUserService roleuserService;
     @ModelAttribute
-    public void commonAttr(Model model, @RequestParam Map<String, String> params) {
-        if (StaticClass.users != null) {
-            model.addAttribute("user", StaticClass.users);
+    public void commonAttr(Model model, @RequestParam Map<String, String> params, Principal p) {
+        if (p != null) {
+            model.addAttribute("user", this.userService.getUserByUn(p.getName()));
 
         }
         model.addAttribute("faculties", this.facultyService.getFalcuties(params));
         model.addAttribute("admission", this.admissionService.getAdmissions(params));
         model.addAttribute("posts", this.postService.getPosts(params));
+        model.addAttribute("livestreams", this.livestreamService.getLiveStreams(params));
+        model.addAttribute("majors", this.majorService.getMajors(params));
         model.addAttribute("banner", this.bannerService.getBanners(params));
-//        model.addAttribute("user", this.userService.getUsers(params));
+        model.addAttribute("users", this.userService.getUsers(params));
+        model.addAttribute("roleusers", this.roleuserService.getRoleUser());
     }
 
     @GetMapping("/admin/settings/")
@@ -65,7 +80,7 @@ public class IndexController {
 
     @GetMapping("/admin/bannersetting/")
     public String AdminSettings1(Model model, @RequestParam Map<String, String> params) {
-        model.addAttribute("banner", this.bannerService.getBanners(params));
+        model.addAttribute("banners", this.bannerService.getBanners(params));
         return "bannersetting";
     }
 
@@ -74,12 +89,31 @@ public class IndexController {
         model.addAttribute("faculty", this.facultyService.getFalcuties(params));
         return "facultysetting";
     }
-//    @GetMapping("/admin/userssettings/")
-//    public String AdminSetting3(Model model, @RequestParam Map<String, String> params) {
-//        model.addAttribute("user", this.userService.getUsers(params));
-//        return "userssettings";
-//    }
-    
+
+    @GetMapping("/admin/majorsetting/")
+    public String AdminSettings4(Model model, @RequestParam Map<String, String> params) {
+        model.addAttribute("major", this.majorService.getMajors(params));
+        return "majorsetting";
+    }
+
+    @GetMapping("/admin/benmarksetting/")
+    public String AdminSettings3(Model model, @RequestParam Map<String, String> params) {
+        model.addAttribute("benmarks", this.benmarkService.getBenMarks(params));
+        return "benmarksetting";
+    }
+
+    @GetMapping("/admin/livestreamsetting/")
+    public String AdminSettings5(Model model, @RequestParam Map<String, String> params) {
+        model.addAttribute("livestreams", this.livestreamService.getLiveStreams(params));
+        return "livestreamsetting";
+    }
+
+    @GetMapping("/admin/userssettings/")
+    public String AdminSetting6(Model model, @RequestParam Map<String, String> params) {
+        model.addAttribute("users", this.userService.getUsers(params));
+        return "userssettings";
+    }
+
     @RequestMapping("/")
     public String index(Model model, @RequestParam Map<String, String> params) {
         model.addAttribute("posts", this.postService.getPosts(params));
@@ -87,5 +121,10 @@ public class IndexController {
         long count = this.postService.countPost();
         model.addAttribute("counter", Math.ceil(count * 1.0 / pageSize));
         return "index";
+    }
+
+    @RequestMapping("/lienhe")
+    public String lienhe() {
+        return "lienhe";
     }
 }

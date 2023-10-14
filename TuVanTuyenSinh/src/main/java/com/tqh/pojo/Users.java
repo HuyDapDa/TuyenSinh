@@ -4,7 +4,9 @@
  */
 package com.tqh.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -45,6 +47,8 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "Users.findByActive", query = "SELECT u FROM Users u WHERE u.active = :active")})
 public class Users implements Serializable {
 
+
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,21 +82,25 @@ public class Users implements Serializable {
     @Column(name = "active")
     private Boolean active;
     @OneToMany(mappedBy = "usersIdusers")
+    @JsonIgnore
     private Set<Post> postSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersIdusers")
+    @JsonIgnore
     private Set<School> schoolSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersIdusers")
+    @JsonIgnore
     private Set<Livestreams> livestreamsSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersIdusers")
+    @JsonIgnore
     private Set<Banner> bannerSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersIdusers")
+    @JsonIgnore
     private Set<Comment> commentSet;
     @JoinColumn(name = "role_user_id_roleuser", referencedColumnName = "id_roleuser")
     @ManyToOne
     private RoleUser roleUserIdRoleuser;
     @Transient
     private MultipartFile file;
-
     public MultipartFile getFile() {
         return file;
     }

@@ -1,18 +1,3 @@
-
-function delPost(path, idpost) {
-    if (confirm("Bạn chắc chắn xóa không?") === true) {
-        fetch(path, {
-            method: "delete"
-        }).then(res => {
-            if (res.status === 204)
-                location.reload();
-            else
-                alert("Something wrong!!!");
-        });
-    }
-}
-
-
 function searchPosts() {
     var searchInput = document.getElementById("searchInput").value.toLowerCase();
     var tableRows = document.getElementsByTagName("tr");
@@ -29,3 +14,15 @@ function searchPosts() {
     }
 }
 
+function delPost(path, idpost) {
+    if (confirm("Bạn chắc chắn xóa không?") === true) {
+        fetch(path, {
+            method: "delete"
+        }).then(res => {
+            if (res.status === 204)
+                location.reload();
+            else
+                alert("Something wrong!!!");
+        });
+    }
+}

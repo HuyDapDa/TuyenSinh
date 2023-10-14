@@ -4,7 +4,9 @@
  */
 package com.tqh.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -39,6 +41,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Comment.findByCreatedDate", query = "SELECT c FROM Comment c WHERE c.createdDate = :createdDate")})
 public class Comment implements Serializable {
 
+    @JoinColumn(name = "comment_idcommentReply", referencedColumnName = "idcomment")
+    @ManyToOne
+    private Comment commentidcommentReply;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,6 +58,7 @@ public class Comment implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date createdDate;
     @OneToMany(mappedBy = "commentIdcomment")
+    @JsonIgnore
     private Set<Comment> commentSet;
     @JoinColumn(name = "comment_idcomment", referencedColumnName = "idcomment")
     @ManyToOne
@@ -65,6 +72,7 @@ public class Comment implements Serializable {
     @JoinColumn(name = "users_idusers", referencedColumnName = "idusers")
     @ManyToOne(optional = false)
     private Users usersIdusers;
+
 
     public Comment() {
     }
@@ -162,5 +170,13 @@ public class Comment implements Serializable {
     public String toString() {
         return "com.tqh.pojo.Comment[ idcomment=" + idcomment + " ]";
     }
-    
+
+    public Comment getCommentidcommentReply() {
+        return commentidcommentReply;
+    }
+
+    public void setCommentidcommentReply(Comment commentidcommentReply) {
+        this.commentidcommentReply = commentidcommentReply;
+    }
+
 }

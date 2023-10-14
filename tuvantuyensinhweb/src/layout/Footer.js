@@ -1,117 +1,99 @@
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import React from "react";
+import {
+    FaFacebook,
+    FaTwitter,
+    FaGithub,
+    FaEnvelope,
+    FaInstagram,
+    FaPhone,
+    FaFax,
+    FaMapMarker
+} from "react-icons/fa";
+import "./Footer.css";
+const Footer = () => (
+    <footer
+        className="page-footer font-small red pt-4"
+        style={{ backgroundColor: "blue", color: "white" }}>
 
-const Footer = () => {
-  return (
-    <div className="my-5">
-      {/* Footer */}
-      <footer className="text-center text-lg-start text-white" style={{ backgroundColor: '#1c2331' }}>
-        {/* Section: Social media */}
-        <section className="d-flex justify-content-between p-4" style={{ backgroundColor: 'red' }}>
-          {/* Left */}
-          <div className="me-5">
-            <span>Liên hệ với chúng tôi:</span>
-          </div>
-          {/* Left */}
-  
-          {/* Right */}
-          <div>
-            {/* Social media icons */}
-            {/* Replace the anchor tags with the appropriate links */}
-            <a style={{ textDecoration: 'none' }} href="a" className="text-white me-4">
-              <i className="fa fa-facebook-f"></i>
-            </a>
-            <a style={{ textDecoration: 'none' }} href="a" className="text-white me-4">
-              <i className="fa fa-twitter"></i>
-            </a>
-            <a style={{ textDecoration: 'none' }} href="a" className="text-white me-4">
-              <i className="fa fa-google"></i>
-            </a>
-            <a style={{ textDecoration: 'none' }} href="a" className="text-white me-4">
-              <i className="fa fa-instagram"></i>
-            </a>
-            <a style={{ textDecoration: 'none' }} href="a" className="text-white me-4">
-              <i className="fa fa-linkedin"></i>
-            </a>
-            <a style={{ textDecoration: 'none' }} href="a" className="text-white me-4">
-              <i className="fa fa-github"></i>
-            </a>
-          </div>
-          {/* Right */}
-        </section>
-        {/* Section: Social media */}
-  
-        {/* Section: Links  */}
-        <section className="">
-          <Container className="text-center text-md-start mt-5">
-            <Row className="mt-3">
-              {/* Grid column */}
-              <Col md={3} lg={4} xl={3} mxAuto mb={4}>
-                <h6 className="text-uppercase fw-bold">Huy</h6>
-                <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: '60px', backgroundColor: '#7c4dff', height: '2px' }} />
-                <p>
-                  Chuyên cung cấp các dịch vụ trang web
-                </p>
-              </Col>
-              {/* Grid column */}
-  
-              {/* Grid column */}
-              <Col md={2} lg={2} xl={2} mxAuto mb={4}>
-                <h6 className="text-uppercase fw-bold">Sản phẩm</h6>
-                <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: '60px', backgroundColor: '#7c4dff', height: '2px' }} />
-                <p>
-                  <a href="#!" className="text-white">Cổng thông tin tư vấn tuyển sinh</a>
-                </p>
-                <p>
-                  <a href="#!" className="text-white">Website bán vé máy bay</a>
-                </p>
-              </Col>
-              {/* Grid column */}
-  
-              {/* Grid column */}
-              <Col md={3} lg={2} xl={2} mxAuto mb={4}>
-                <h6 className="text-uppercase fw-bold">Useful links</h6>
-                <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: '60px', backgroundColor: '#7c4dff', height: '2px' }} />
-                <p>
-                  <a href="#!" className="text-white">Your Account</a>
-                </p>
-                <p>
-                  <a href="#!" className="text-white">Become an Affiliate</a>
-                </p>
-                <p>
-                  <a href="#!" className="text-white">Shipping Rates</a>
-                </p>
-                <p>
-                  <a href="#!" className="text-white">Help</a>
-                </p>
-              </Col>
-              {/* Grid column */}
-  
-              {/* Grid column */}
-              <Col md={4} lg={3} xl={3} mxAuto mbMd={0} mb={4}>
-                <h6 className="text-uppercase fw-bold">Hợp tác</h6>
-                <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: '60px', backgroundColor: '#7c4dff', height: '2px' }} />
-                <p><i className="fa fa-home mr-3"></i> Việt Nam, VN</p>
-                <p><i className="fa fa-envelope mr-3"></i> huy@gmail.com</p>
-                <p><i className="fa fa-phone mr-3"></i> 0938842106</p>
-                <p><i className="fa fa-print mr-3"></i> 123456789</p>
-              </Col>
-              {/* Grid column */}
-            </Row>
-          </Container>
-        </section>
-        {/* Section: Links  */}
-  
-        {/* Copyright */}
-        <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-          © 2023 Copyright:
-          <a className="text-white" href="a">Huy</a>
+        <div className="container-fluid text-center text-md-left">
+            <div className="row">
+                <div className="col-md-6 mt-md-0 mt-3">
+                    <h5 className="text-uppercase">Cổng thông tin tuyển sinh</h5>
+                    <p>Liên hệ với chúng tôi</p>
+                    <ul className="list-unstyled contact-info" style={{ marginRight : "50px" }}>
+                        <li><i className="social-icon"></i><FaMapMarker/> 35-37 Hồ Hảo Hớn, P.Cô Giang, Q1, Tp.HCM</li>
+                        <li><i className="social-icon"></i><FaPhone/> 028.39207627; 08.39300072</li>
+                        <li><i className="social-icon"></i><FaFax/> Hotline: 1800585884</li>
+                        <li><i className="social-icon"></i><FaEnvelope /> tuyensinh@ou.edu.vn</li>
+                    </ul>
+                    <div className="social-icons">
+                        <div className="social-icon"><FaFacebook /></div>
+                        <div className="social-icon"><FaTwitter /></div>
+                        <div className="social-icon"><FaGithub /></div>
+                        <div className="social-icon"><FaEnvelope /></div>
+                        <div className="social-icon"><FaInstagram /></div>
+                    </div>
+
+                </div>
+
+
+                <hr className="clearfix w-100 d-md-none pb-0" />
+
+                <div className="col-md-3 mb-md-0 mb-2">
+                    <h5 className="text-uppercase">Cơ sở học tập</h5>
+                    <ul
+                        className="list-unstyled"
+                        style={{ textAlign: "left", color: "white" }}
+                    >
+                        <li>
+                            <b>Cơ sở 1:</b> 97 Võ Văn Tần P6 Q3 Tp.HCM.
+                        </li>
+                        <li>
+                            <b>Cơ sở 2:</b> 35-37 Hồ Hảo Hớn, Phường Cô Giang, Quận 1, Tp. Hồ
+                            Chí Minh.
+                        </li>
+                        <li>
+                            <b>Cơ sở 3:</b> Khu dân cư Nhơn Trạch, Huyện Nhà Bè, Tp. Hồ Chí
+                            Minh.
+                        </li>
+                        <li>
+                            <b>Cơ sở 4:</b> 02 Mai Thị Lựu, Phường Đa Kao, Quận 1, Tp. Hồ Chí
+                            Minh.
+                        </li>
+                        <li>
+                            <b>Cơ sở 5:</b> 68 Lê Thị Trung, Tp.Thủ Dầu Một, Tỉnh Bình Dương.
+                        </li>
+                        <li>
+                            <b>Cơ sở 6:</b> Phường Long Bình Tân, Tp. Biên Hòa, Tỉnh Đồng Nai.
+                        </li>
+                        <li>
+                            <b>Cơ sở 7:</b> Phường Long Bình Tân, Tp. Biên Hòa, Tỉnh Đồng Nai.
+                        </li>
+                    </ul>
+                </div>
+
+                <div className="col-md-3 mb-md-0 mb-3">
+                    <h5 className="text-uppercase">Bản đồ</h5>
+                    <ul className="list-unstyled" style={{ color: "white" }}>
+                        <li>
+                            <iframe
+                                width="100%"
+                                height="300"
+                                frameBorder="0"
+                                src="https://maps.google.com/maps?q=35-37%20H%E1%BB%93%20H%E1%BA%A3o%20H%E1%BB%9Bn%20Qu%E1%BA%ADn%201%20Th%C3%A0nh%20ph%E1%BB%91%20H%E1%BB%93%20Ch%C3%AD%20Minh&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+                                title="Google Map"
+                            ></iframe>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        {/* Copyright */}
-      </footer>
-      {/* Footer */}
-    </div>
-  );
-}
+
+        <div className="footer-copyright text-center py-3">
+            © 2023 Copyright:
+            <a> Huy&Danh</a>
+        </div>
+    </footer>
+);
 
 export default Footer;
