@@ -76,58 +76,61 @@
     </div>
 </c:forEach>
 <section class="p-5 align-self-center section_subs bg-primary">
-        <div class="container">
-            <div class="col-md-12 m-pad-subs">
-                <div id="w-4_container">
-                    <div id="w-4">
-                        <div class="rendered-form ">
-                            <div class="">
-                                <h1 class="text-center section_subs_title fw-bold" id="control-849089">
-                                    CÂU HỎI TUYỂN SINH<br>
-                                </h1>
-                            </div>
+    <div class="container">
+        <div class="col-md-12 m-pad-subs">
+            <div id="w-4_container">
+                <div id="w-4">
+                    <div class="rendered-form ">
+                        <div class="">
+                            <h1 class="text-center section_subs_title fw-bold" id="control-849089">
+                                CÂU HỎI TUYỂN SINH<br>
+                            </h1>
+                        </div>
+                        <c:url value="/questionnow/" var="action" />
+                        <form:form method="post" action="${action}" modelAttribute="QModel" enctype="multipart/form-data">
                             <div class="fb-text form-group field-hoten">
                                 <label for="hoten" class="fb-text-label">Họ tên:<br></label>
-                                    <input type="text" class="form-control" 
+                                    <form:input type="text" class="form-control" 
                                                 path="hoTen" id="ten" maxlength="100"/>
-                                    <label for="name">Họ tên:</label>
+                               
                             </div>
                             <div class="fb-text form-group field-email">
                                 <label for="hoten" class="fb-text-label">Email:<br></label>
-                                    <input type="text" class="form-control" 
+                                    <form:input type="text" class="form-control" 
                                                 path="Email" id="email" maxlength="100" />
-                                    <label for="name">Email</label>
+                                
                             </div>
                             <div class="fb-text form-group field-dienthoai">
                                 <label for="hoten" class="fb-text-label">Điện thoại:<br></label>
-                                    <input type="text" class="form-control" 
+                                    <form:input type="text" class="form-control" 
                                                 path="sdt" id="ten" maxlength="100" />
-                                    <label for="name">Số Điện Thoại</label>
+                            
                             </div>
                             <div class="fb-textarea form-group field-textarea-1581500170575">
                                 <label for="hoten" class="fb-text-label">Câu hỏi:<br></label>
-                                <input type="text" class="form-control" 
-                                            path="cauHoi" id="ten" maxlength="100"/>
-                                <label for="name">Câu hỏi</label>
+                                    <form:input type="text" class="form-control" 
+                                                path="cauHoi" id="ten" maxlength="100"/>
                             </div>
                             <div class="fb-select form-group field-hedt">
                                 <label class="fb-select-label">Hệ đào tạo:<br></label>
-                                <select path"heDaoTao" class="browser-default custom-select" id="hedtSelect" name="hedt">
-                                    <c:forEach items="${admission}" var="ds">
+                                    <form:select class="browser-default custom-select" id="heDaoTao" name="heDaoTao" 
+                                                 path="heDaoTao">
+                                        <c:forEach items="${admission}" var="ds">
                                         <option value="${ds.typeoftraining}">${ds.typeoftraining}</option>
                                     </c:forEach>
-                                </select>
+                                </form:select>
                             </div>
-                        </div>
-                    </div>
-                    <div id="w-4_footer">
-                        <button type="button" class=" btn btn-danger m-btn-regsubs waves-effect waves-light"  onclick="do_submit_widget_form_4();return false;">
-                            Đăng ký nhận thông tin
-                        </button>
+                            <div class="form-floating mb-3 mt-3">
+                                <button class="btn btn-info" type="submit">
+                                    Đăng ký nhận thông tin
+                                </button>
+                            </div>
+                        </form:form>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 <script src="<c:url value="/assets/js/banner.js" />"></script>

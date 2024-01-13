@@ -1,9 +1,3 @@
-<%-- 
-    Document   : livestreams
-    Created on : Sep 29, 2023, 6:08:49 PM
-    Author     : HP
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>

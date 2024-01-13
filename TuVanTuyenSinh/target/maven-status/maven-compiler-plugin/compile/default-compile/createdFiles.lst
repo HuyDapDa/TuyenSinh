@@ -74,7 +74,6 @@ com\tqh\controllers\BannerController.class
 com\tqh\controllers\FacultyController.class
 com\tqh\service\CommentService.class
 com\tqh\filters\JwtAuthenticationTokenFilter.class
-com\tqh\pojo\CountPoint.class
 com\tqh\filters\CustomAccessDeniedHandler.class
 com\tqh\formatter\MajorFormatter.class
 com\tqh\pojo\Comment_.class
